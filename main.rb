@@ -7,9 +7,8 @@ require 'dm-types'
 require 'dm-tags'
 require 'haml'
 require 'sass'
-#DataMapper::setup(:default, "mysql://forum:blah@localhost/forum")
-DataMapper::setup(:default, "sqlite3:./forum.db")
 
+DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://my.db')
 load 'models/forum.rb'
 DataMapper.auto_upgrade!
 
