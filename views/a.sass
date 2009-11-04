@@ -98,6 +98,58 @@ img
   overflow: no
 
 
+#mainmenu
+  position: absolute
+  bottom: 20px
+  left: 15%
+  z-index: 90
+  width: 100%
+  line-height: 12px
+
+  div
+    height: 56px
+    background: #000
+    opacity: 0.6
+    filter: alpha(opacity=60)
+    padding: 7px 0 0 7px
+
+  h1
+    position: relative
+    left: -100%
+    margin-bottom: -63px
+    width: 100%
+    opacity: 0.99
+
+    a
+      padding: 41px 10px 10px 0
+      color: #fff
+      background: #090 url('/g/go.gif') 0 -30px repeat-x
+      font-size: 11px
+      text-align: right
+      display: block
+
+      &:hover
+        background: #000 url('/g/go.gif') 0 43px repeat-x
+
+  ul
+    float: left
+    width: 110px
+
+  li a
+    height: 12px
+    padding: 0 5px
+    font-weight: bold
+    color: #999
+    display: block
+
+    &:hover
+      color: #fff
+
+
+li.cur a
+  color: #fff
+
+
 #menu
   position: absolute
   bottom: 20px
@@ -113,33 +165,29 @@ img
     filter: alpha(opacity=60)
     padding: 7px 0 0 7px
 
+  h1
+    position: relative
+    left: -44%
+    margin-bottom: -63px
+    width: 44%
+    opacity: 0.99
 
-h1
-  position: relative
-  left: -44%
-  margin-bottom: -63px
-  width: 44%
-  opacity: 0.99
+    a
+      padding: 41px 10px 10px 0
+      color: #fff
+      background: #090 url('/g/go.gif') 0 -30px repeat-x
+      font-size: 11px
+      text-align: right
+      display: block
 
-  a
-    padding: 41px 10px 10px 0
-    color: #fff
-    background: #090 url('/g/go.gif') 0 -30px repeat-x
-    font-size: 11px
-    text-align: right
-    display: block
+      &:hover
+        background: #000 url('/g/go.gif') 0 43px repeat-x
 
-    &:hover
-      background: #000 url('/g/go.gif') 0 43px repeat-x
+  ul
+    float: left
+    width: 110px
 
-
-ul
-  float: left
-  width: 110px
-
-
-li
-  a
+  li a
     height: 12px
     padding: 0 5px
     font-weight: bold
@@ -149,8 +197,9 @@ li
     &:hover
       color: #fff
 
-  &.cur a
-    color: #fff
+
+li.cur a
+  color: #fff
 
 
 #mainbox
