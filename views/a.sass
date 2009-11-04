@@ -26,14 +26,15 @@ html, body
 
 
 #mainbox
-  width: 100%
+  width: 50%
   height: 100%
+  margin-left: 50%
   overflow: hidden
 
 
 #userbox
   width: 50%
-  height: 20%
+  height: 30%
   overflow: hidden
 
 
@@ -154,8 +155,8 @@ li.cur a
   position: absolute
   bottom: 20px
   left: 15%
-  z-index: 90
-  width: 31.5%
+  z-index: 50
+  width: 100%
   line-height: 12px
 
   div
@@ -167,9 +168,9 @@ li.cur a
 
   h1
     position: relative
-    left: -44%
+    left: -100%
     margin-bottom: -63px
-    width: 44%
+    width: 100%
     opacity: 0.99
 
     a
@@ -206,14 +207,12 @@ li.cur a
   .box
     position: absolute
     top: 74px
-    right: 20px
-    width: 50%
+    width: 95%
     padding-bottom: 20px
 
     div
       line-height: 1.5em
       background: #fff
-      padding: 20px 30px
 
       a
         text-decoration: underline
@@ -247,8 +246,9 @@ li.cur a
     top: 0px
     left: -11%
     width: 60%
-    padding-bottom: 10%
+    padding-bottom: 20%
     padding-right: 3%
+    padding-left: 3%
 
     div
       line-height: 1.5em
@@ -263,9 +263,9 @@ li.cur a
     top: 0
     right: 10%
     font-size: 13px
-    background: #633
-    opacity: 0.7
-    filter: alpha(opacity=70)
+    background: #833
+    opacity: 0.8
+    filter: alpha(opacity=80)
 
   .left
     text-align: left
@@ -303,11 +303,18 @@ li.cur a
   color: #fff
 
 
+#stuff p
+  padding: 0 30px 10px 30px
+
+  &.last
+    padding: 0 30px 30px 30px
+
+
 h3
   position: relative
   border-bottom-width: 1px
-  padding: 20px 30px 00px 30px
-  margin: 0 -30px 20px -30px
+  padding: 10px 0px 0px 30px
+  margin: 0 0px 10px 0px
   text-transform: uppercase
   line-height: 20px
   font-weight: bold
@@ -319,6 +326,7 @@ h3
     background: #000
     text-align: center
     padding: 0 5px
+    margin-left: 10px
     white-space: nowrap
     display: block
     color: #fff
