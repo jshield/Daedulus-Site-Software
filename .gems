@@ -1,7 +1,7 @@
 sinatra-sinatra --source http://gems.github.com
-dm-core
-dm-types
+dm-core --version '>= 0.10.1' --source http://gems.github.com
 dm-is-tree --version '>= 0.10.1' --source http://gems.github.com
+dm-types --version '>= 0.10.1' --source http://gems.github.com
 dm-tags 
 sqlite3-ruby
 haml
