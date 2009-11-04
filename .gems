@@ -1,6 +1,6 @@
 sinatra-sinatra --source http://gems.github.com
 dm-core
-dm-more
+dm-types
 dm-is-tree
 dm-tags
 sqlite3-ruby
