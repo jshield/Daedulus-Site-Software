@@ -1,0 +1,40 @@
+!!! Strict
+%html{ "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
+    %title
+      DAEDBOX
+    %meta{ :content => "no", "http-equiv" => "imagetoolbar" }
+    %link{ :href => "/css/a", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+  %body
+    #menu
+      %h1
+        %a{ :href => "/" }
+          %b
+            DAED
+          BOX
+      %div
+        %ul
+          %li.cur
+            %a{ :href => "/" }
+              MAIN
+          %li
+            %a{ :href => "projects.html" }
+              PROJECTS
+          %li
+            %a{ :href => "/blog" }
+              BLOG
+          %li
+            %a{ :href => "/forum" }
+              FORUM
+
+    #mainbox
+      .box.large.left
+        %h2
+          %b= @date
+    #bg
+      %div
+        %table{ :cellspacing => "0", :cellpadding => "0" }
+          %tr
+            %td
+
