@@ -1,0 +1,7 @@
+sinatra-sinatra --source http://gems.github.com
+dm-core
+dm-more
+dm-is-tree
+dm-tags
+sqlite3-ruby
+haml
