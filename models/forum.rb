@@ -30,5 +30,6 @@ class Post
   belongs_to :user
   is :tree, :order => :id
   has_tags_on :tags
+  
 end
 

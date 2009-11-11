@@ -21,6 +21,14 @@ get '/css/a' do
   sass :a
 end
 
+get '/run-tests' do
+
+  user = User.create(:name => "James Alexander Shield", :email => "test@test.dan", :password => "testpass")
+  user.post.create(:title => "Test Post", :body => "Test Body")
+  user.save
+
+end
+
 get '/css/yui' do
   content_type 'text/css', :charset => 'utf-8'
   sass :yui_reset
@@ -32,5 +40,6 @@ get '/' do
 end
 
 get '/forum' do
+  @posts = Post.last(5)
   haml :forum_index
 end
