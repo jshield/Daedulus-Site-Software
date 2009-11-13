@@ -56,15 +56,12 @@
               %a.login{:href => "#"}
                 Login
             %form.login{:method => "POST", :action => "/user/login" }
-              Username
+
+              %input{ :type => "text", :name => "user", :value => "Username"}
               %br
-              %input{ :type => "text", :name => "user"}
+              %input{ :type => "password", :name => "pass", :value => "Password"}
               %br
-              Password
-              %br
-              %input{ :type => "password", :name => "pass"}
-              %br
-              %input.button{ :type => "submit", :name => "submit"}
+              %input.button{ :type => "submit", :name => "submit", :value => "Submit"}
               
 
     #mainbox
