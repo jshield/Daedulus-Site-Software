@@ -31,15 +31,6 @@
           %li.cur
             %a{ :href => "/forum" }
               Test Forum
-          %li
-            %a{ :href => "/" }
-              Test Forum
-          %li
-            %a{ :href => "/" }
-              Test Forum
-          %li
-            %a{ :href => "/" }
-              Test Forum
     #userbox
       .box.medium.right.red
         %h2
@@ -58,14 +49,17 @@
     #mainbox
       #content.box.sml
         %h2
-          %b Test Forum        
-        #stuff
+          - unless @child == true
+            %b Test Forum       
+          - if @child == true
+            %b= @posts.first.title 
+        #stuff        
           - @posts.each do |pt|
-            %h3= pt.title
-            %p= pt.created_at
-            %p= pt.body
-    #bg
-      %div
-        %table{ :cellspacing => "0", :cellpadding => "0" }
-          %tr
-            %td
+            #reply
+              - unless pt == @posts.first and @child == true
+                %h3= "<a class =\"title\" href=\"/forum/post/#{pt.user.id}\">#{pt.title}</a>"
+              - else
+                %h3= "TOP POST"
+              %p= "<b>by <a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%T")}</b>"
+              %p= pt.body
+

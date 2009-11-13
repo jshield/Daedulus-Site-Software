@@ -5,6 +5,7 @@ require 'dm-core'
 require 'dm-is-tree'
 require 'dm-types'
 require 'dm-tags'
+require 'dm-timestamps'
 require 'haml'
 require 'sass'
 
@@ -21,11 +22,18 @@ get '/css/a' do
   sass :a
 end
 
-get '/run-tests' do
-
+get '/debug/run-tests' do
   user = User.create(:name => "James Alexander Shield", :email => "test@test.dan", :password => "testpass")
-  user.post.create(:title => "Test Post", :body => "Test Body")
+  post = user.post.create(:title => "Test Post", :body => "Test Body")
+  post.children.create(:title => "Test Reply", :body => "Test Reply Body", :user_id => user.id)
   user.save
+end
+
+get '/debug/reset-database' do
+  DataMapper.auto_migrate!
+end
+
+get 'debug/dump-database' do
 
 end
 
@@ -40,6 +48,18 @@ get '/' do
 end
 
 get '/forum' do
-  @posts = Post.last(5)
+  @posts = Post.roots.last(5)
   haml :forum_index
+end
+
+get '/forum/post/:pid' do |p|
+  puts p
+  @posts = Post.get(p)
+  unless @posts == nil
+  @child = true
+  @posts = @posts.to_a + @posts.children.to_a
+    haml :forum_index
+  else
+   redirect "/forum/"
+  end
 end

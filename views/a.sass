@@ -33,7 +33,7 @@ html, body
 
 
 #userbox
-  width: 50%
+  width: 45%
   height: 50%
   overflow: hidden
 
@@ -63,6 +63,12 @@ a
 
 img
   display: block
+
+
+#reply
+  border-width: 1px
+  border-bottom-width: 0px
+  border-color: #666
 
 
 #bg
@@ -214,9 +220,6 @@ li.cur a
       line-height: 1.5em
       background: #fff
 
-      a
-        text-decoration: underline
-
   .large
     text-align: right
     top: 125px
@@ -317,23 +320,32 @@ h3
   position: relative
   border-bottom-width: 1px
   padding: 12px 0px 0px 30px
-  margin: 0 0px 10px 0px
+  margin: 0 0px -2px 0px
   text-transform: uppercase
   line-height: 20px
   font-weight: bold
 
-  span
-    position: absolute
-    right: 510px
-    top: 29px
-    background: #000
-    text-align: center
-    padding: 0 5px
-    margin-left: 10px
-    white-space: nowrap
-    display: block
-    color: #fff
-    font-weight: normal
+
+#reply b
+  padding: 12px 0 0 5px
+
+
+#stuff a.title
+  color: #333
+
+
+h3 span
+  position: absolute
+  right: 510px
+  top: 29px
+  background: #000
+  text-align: center
+  padding: 0 5px
+  margin-left: 10px
+  white-space: nowrap
+  display: block
+  color: #fff
+  font-weight: normal
 
 
 dl
@@ -418,3 +430,7 @@ dd
 
   &.prv
     background-position: 7px 5px
+
+
+hr
+  color: #FFF
