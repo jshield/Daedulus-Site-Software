@@ -9,11 +9,19 @@ require 'dm-timestamps'
 require 'haml'
 require 'sass'
 require 'date'
+require 'extensions/auth.rb'
+
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:./my.db')
 load 'models/forum.rb'
 DataMapper.auto_upgrade!
 
-enable :session
+before do
+  if authorized?
+  @user = User.get(session[:uid])
+  end
+end
+
+enable :sessions
 set :environment, :development
 set :public, "./public"
 
@@ -23,10 +31,14 @@ get '/css/a' do
 end
 
 get '/debug/run-tests' do
-  user = User.create(:name => "James Alexander Shield", :email => "test@test.dan", :password => "testpass")
+  user = User.create(:name => "James Alexander Shield", :uname => "test", :email => "test@test.dan", :password => "testpass")
   post = user.post.create(:title => "Test Post", :body => "Test Body")
   post.children.create(:title => "Test Reply", :body => "Test Reply Body", :user_id => user.id)
   user.save
+end
+
+post '/forum/post' do
+   
 end
 
 get '/debug/reset-database' do
@@ -35,6 +47,14 @@ end
 
 get 'debug/dump-database' do
 
+end
+
+get '/debug/auth' do
+  if authorized?
+    "Authorized!"
+  else
+    "Access Denied!"
+  end  
 end
 
 get '/css/yui' do

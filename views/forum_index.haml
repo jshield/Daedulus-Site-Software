@@ -6,6 +6,10 @@
       DAEDBOX: Test Forum
     %meta{ :content => "no", "http-equiv" => "imagetoolbar" }
     %link{ :href => "/css/a", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    %script{ :src => "http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js", :type => "text/javascript"}
+    :javascript
+    
+      $(document).ready(function() {$('form.login').hide(); $('a.login').click(function() {$('a.login').hide(); $('form.login').show('slow');});});
   %body
     #menu
       %h1
@@ -36,15 +40,32 @@
         %h2
           %b User Box
         %ul
-          %li
-            %a{:href => "/user/profile"} 
-              Profile
-          %li
-            %a{:href => "/user/messages"} 
-              Messages
-          %li
-            %a{:href => "/user/logout"} 
-              Logout
+          - if authorized?
+            %li= "<b>Hello, #{@user.name}</b>" 
+            %li
+              %a{:href => "/user/profile"} 
+                Profile
+            %li
+              %a{:href => "/user/messages"} 
+                Messages
+            %li
+              %a{:href => "/user/logout"} 
+                Logout
+          - else
+            %li
+              %a.login{:href => "#"}
+                Login
+            %form.login{:method => "POST", :action => "/user/login" }
+              Username
+              %br
+              %input{ :type => "text", :name => "user"}
+              %br
+              Password
+              %br
+              %input{ :type => "password", :name => "pass"}
+              %br
+              %input.button{ :type => "submit", :name => "submit"}
+              
 
     #mainbox
       #content.box.sml
@@ -60,6 +81,6 @@
                 %h3= "<a class =\"title\" href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
               - else
                 %h3= "TOP POST"
-              %p= "<b>by <a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%T")}</b>"
+              %p= "<b>by <a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%H:%M")}</b>"
               %p= pt.body
 
