@@ -8,7 +8,7 @@ require 'dm-tags'
 require 'dm-timestamps'
 require 'haml'
 require 'sass'
-
+require 'date'
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:./my.db')
 load 'models/forum.rb'
 DataMapper.auto_upgrade!
