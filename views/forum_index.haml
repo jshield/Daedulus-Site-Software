@@ -57,7 +57,7 @@
           - @posts.each do |pt|
             #reply
               - unless pt == @posts.first and @child == true
-                %h3= "<a class =\"title\" href=\"/forum/post/#{pt.user.id}\">#{pt.title}</a>"
+                %h3= "<a class =\"title\" href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
               - else
                 %h3= "TOP POST"
               %p= "<b>by <a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%T")}</b>"
