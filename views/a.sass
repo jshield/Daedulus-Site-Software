@@ -42,7 +42,7 @@ body
   font-family: Arial,Helvetica,sans-serif
   font-size: 10px
   cursor: default
-  background-color: #636466
+  background-color: #456
   color: #000
 
 
@@ -63,12 +63,6 @@ a
 
 img
   display: block
-
-
-#reply
-  border-width: 1px
-  border-bottom-width: 0px
-  border-color: #666
 
 
 #bg
@@ -218,7 +212,7 @@ li.cur a
 
     div
       line-height: 1.5em
-      background: #fff
+      background: none
 
   .large
     text-align: right
@@ -309,29 +303,93 @@ li.cur a
   color: #fff
 
 
-#stuff p
-  padding: 0 30px 10px 30px
+#reply
+  p
+    &.by
+      padding: 0 35px 2px 35px
+      font-weight: bold
+      background-color: #AAB
 
-  &.last
-    padding: 0 30px 30px 30px
+    &.body
+      padding: 5px 40px 10px 40px
+      background-color: #BBF
+      min-height: 100px
+      font-size: 12px
+
+    &.last
+      padding: 0 30px 30px 30px
+
+  a.title
+    color: #333
+
+
+#topic
+  overflow: hidden
+  margin-bottom: 10px
+
+
+#ttime
+  height: 60px
+  width: 10%
+  float: left
+
+
+#ttitle
+  height: 60px
+  width: 70%
+  float: left
+
+
+#tposter
+  height: 60px
+  width: 20%
+  float: right
+
+
+#ttime p
+  background-color: #BBF
+  text-align: center
+  font-weight: bold
+  font-size: 14px
+  padding-top: 15px
+  height: 60px
+
+
+#ttitle p
+  background-color: #AAB
+  text-align: left
+  font-weight: bold
+  font-size: 14px
+  padding-left: 15px
+  padding-top: 22px
+  height: 60px
+
+
+#tposter p
+  background-color: #AAB
+  text-align: center
+  font-weight: bold
+  font-size: 14px
+  padding-top: 15px
+  height: 60px
 
 
 h3
   position: relative
-  border-bottom-width: 1px
   padding: 12px 0px 0px 30px
-  margin: 0 0px -2px 0px
   text-transform: uppercase
   line-height: 20px
   font-weight: bold
+  background-color: #AAA
+  font-size: 13px
 
 
-#reply b
-  padding: 12px 0 0 5px
+#reply
+  min-height: 50px
+  padding-bottom: 10px
 
-
-#stuff a.title
-  color: #333
+  b
+    padding: 12px 0 0 5px
 
 
 input

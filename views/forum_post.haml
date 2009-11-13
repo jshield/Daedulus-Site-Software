@@ -67,16 +67,14 @@
     #mainbox
       #content.box.sml
         %h2
-          - unless @child == true
-            %b Test Forum       
-          - if @child == true
-            %b= @posts.first.title 
+          %b= @posts.first.title 
         #stuff        
           - @posts.each do |pt|
-            #topic
-              #ttime
-                %p= "#{pt.created_at.strftime("%D")}<br>#{pt.created_at.strftime("%H:%M")}"
-              #ttitle
-                %p= "<a class =\"title\" href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
-              #tposter  
-                %p= "<a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a>"
+            #reply
+              - unless pt == @posts.first 
+                %h3= "<a class =\"title\" href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
+              - else
+                %h3= "TOP POST"
+              %p.by= "by <a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%H:%M")}"
+              %p.body= pt.body
+

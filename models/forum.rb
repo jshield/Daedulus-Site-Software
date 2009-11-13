@@ -36,5 +36,8 @@ class Post
   is :tree, :order => :id
   has_tags_on :tags
   
+  validates_present :title
+  validates_present :body
+  
 end
 

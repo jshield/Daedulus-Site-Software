@@ -38,7 +38,11 @@ get '/debug/run-tests' do
 end
 
 post '/forum/post' do
-   
+ Post.create(:title => params[:title], :body => params[:body])    
+end
+
+post '/forum/reply/:pid' do
+
 end
 
 get '/debug/reset-database' do
@@ -73,12 +77,10 @@ get '/forum' do
 end
 
 get '/forum/post/:pid' do |p|
-  puts p
   @posts = Post.get(p)
   unless @posts == nil
-  @child = true
   @posts = @posts.to_a + @posts.children.to_a
-    haml :forum_index
+    haml :forum_post
   else
    redirect "/forum/"
   end
