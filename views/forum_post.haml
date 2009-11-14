@@ -7,62 +7,10 @@
     %meta{ :content => "no", "http-equiv" => "imagetoolbar" }
     %link{ :href => "/css/a", :rel => "stylesheet", :media => "screen", :type => "text/css" }
     %script{ :src => "http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js", :type => "text/javascript"}
-    :javascript
-    
-      $(document).ready(function() {$('form.login').hide(); $('a.login').click(function() {$('a.login').hide(); $('form.login').show('slow');});});
+    = haml :userfunction
   %body
-    #menu
-      %h1
-        %a{ :href => "/" }
-          %b
-            DAED
-          BOX
-      %div
-        %ul
-          %li
-            %a{ :href => "/" }
-              MAIN
-          %li
-            %a{ :href => "/projects" }
-              PROJECTS
-          %li
-            %a{ :href => "/blog" }
-              BLOG
-          %li.cur
-            %a{ :href => "/forum" }
-              FORUM
-        %ul
-          %li.cur
-            %a{ :href => "/forum" }
-              Test Forum
-    #userbox
-      .box.medium.right
-        %ul
-          - if authorized?
-            %li= "<b>Hello, #{@user.name}</b>"
-            %br 
-            %li
-              %a{:href => "/user/profile"} 
-                Profile
-            %li
-              %a{:href => "/user/messages"} 
-                Messages
-            %li
-              %a{:href => "/user/logout"} 
-                Logout
-          - else
-            %li
-              %a.login{:href => "#"}
-                Login
-            %form.login{:method => "POST", :action => "/user/login" }
-
-              %input{ :type => "text", :name => "user", :value => "Username"}
-              %br
-              %input{ :type => "password", :name => "pass", :value => "Password"}
-              %br
-              %input.button{ :type => "submit", :name => "submit", :value => "Submit"}
-              
-
+    = haml :mainmenu
+    = haml :userbox  
     #mainbox
       #content.box.sml
         %h2
@@ -71,15 +19,15 @@
           - @posts.each do |pt|
             #reply
               - unless pt == @posts.first 
-                %h3= "<a class =\"title\" href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
+                %h3.title= "<a class =\"title\" href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
               - else
-                %h3= "TOP POST"
+                %h3.title= "TOP POST"
               %p.by= "by <a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%H:%M")}"
               %p.body= pt.body
               %p.links
-                %a{:href => "#"}
+                %a.report{:href => "#" }
                   Report
                 |
-                %a{:href => "#"}
+                %a.reply{:href => "#", :name => pt.id}
                   Reply
               

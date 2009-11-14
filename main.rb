@@ -39,9 +39,19 @@ get '/debug/run-tests' do
 end
 
 post '/forum/post' do
- Post.create(:title => params[:title], :body => params[:body])
- 
-     
+  
+  if authorized?
+     post = Post.create(:user_id => params[:uid], :title => params[:title], :body => params[:body])
+     post.parent_id = params[:pid] if defined?(params[:pid])
+    if post.valid? 
+      post.save
+      redirect "/forum/post/#{post.id}"
+    else
+      redirect request.referer
+    end
+  else
+    redirect request.referer
+  end
 end
 
 post '/forum/reply/:pid' do
@@ -88,3 +98,4 @@ get '/forum/post/:pid' do |p|
    redirect "/forum/"
   end
 end
+

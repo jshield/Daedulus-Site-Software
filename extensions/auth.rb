@@ -19,13 +19,6 @@ module Sinatra
 
     def self.registered(app)
       app.helpers SessionAuth::Helpers
-
-      app.get '/user/login' do
-        "<form method='POST' action='/user/login'>" +
-        "<input type='text' name='user'>" +
-        "<input type='password' name='pass'>" +
-        "</form>"
-      end
       
       app.get '/user/logout' do
         logout!
@@ -36,6 +29,7 @@ module Sinatra
           case params[:reason]
             when "user" then "Unknown User"
             when "pass" then "Wrong Password"
+            when "register" then "Failure in registeration"
             else "Unknown Error!"
           end
       end
@@ -54,6 +48,16 @@ module Sinatra
         else
           session[:authorized] = false
           redirect '/user/error/user'
+        end
+      end
+      
+      app.post '/user/register' do
+        newuser = User.create(:uname => params[:user], :name => params[:disp], :email => params[:email], :password => params[:pass])
+        if newuser.valid?
+          newuser.save
+          redirect request.referer
+        else
+          redirect '/user/error/register'
         end
       end
     end
