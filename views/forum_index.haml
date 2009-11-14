@@ -74,8 +74,8 @@
           - @posts.each do |pt|
             #topic
               #ttime
-                %p= "#{pt.created_at.strftime("%D")}<br>#{pt.created_at.strftime("%H:%M")}"
+                %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}"
               #ttitle
-                %p= "<a class =\"title\" href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
+                %p= "<a href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
               #tposter  
                 %p= "<a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a>"
