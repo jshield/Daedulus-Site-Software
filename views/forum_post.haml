@@ -76,4 +76,10 @@
                 %h3= "TOP POST"
               %p.by= "by <a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%H:%M")}"
               %p.body= pt.body
-
+              %p.links
+                %a{:href => "#"}
+                  Report
+                |
+                %a{:href => "#"}
+                  Reply
+              
