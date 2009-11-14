@@ -39,7 +39,9 @@ get '/debug/run-tests' do
 end
 
 post '/forum/post' do
- Post.create(:title => params[:title], :body => params[:body])    
+ Post.create(:title => params[:title], :body => params[:body])
+ 
+     
 end
 
 post '/forum/reply/:pid' do
