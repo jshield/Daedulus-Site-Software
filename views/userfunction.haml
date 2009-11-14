@@ -1,0 +1,30 @@
+:javascript    
+  $(document).ready(function() {
+  $('form.login').hide();
+  $('form.register').hide();
+  $('form.npst').hide();
+    $('a.login').click(function() {
+      $('a.login').hide();
+      $('a.register').hide(); 
+      $('form.login').show('slow');
+    });
+    $('a.register').click(function() {
+      $('a.login').hide(); 
+      $('a.register').hide(); 
+      $('form.register').show('slow');
+    });
+    $('a.npst').click(function() {
+      $('a.npst').hide();
+      $('form.npst').show('slow');
+    });
+    $('input.button.register').click(function() {
+      validate_registration();
+    });
+    $('a.reply').click(function(){
+     id = $(this).attr("name");
+     $('p.links').hide();
+     $('form.npst').append("<input type ='hidden' name='pid' value='" + id + "'>");
+     $('a.npst').click();
+    });
+  });
+
