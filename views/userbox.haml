@@ -1,7 +1,7 @@
 #userbox
   .box.medium.right
     %ul
-      - if authorized?
+      - if authorized? and @user != nil 
         %li= "<b>Hello, #{@user.name}</b>"
         %br 
         %li
@@ -36,7 +36,7 @@
         %li
           %a.register{:href => "#"}
             Register
-        %form.register{:method => "POST", :action => "/user/register" }
+        %form.register{:method => "POST", :id => "form_register", :action => "/user/register" }
           %input{ :type => "text", :name => "user", :value => "Username"}
           %br
           %input{ :type => "text", :name => "disp", :value => "Display Name"}
@@ -45,5 +45,5 @@
           %br
           %input{ :type => "password", :name => "pass", :value => "Password"}
           %br
-          %input.button.register{ :type => "button", :name => "submit", :value => "Register"}
+          %input.button.register{ :type => "submit", :name => "submit", :value => "Register"}
           

@@ -4,5 +4,9 @@ dm-is-tree --version '>= 0.10.1' --source http://gems.github.com
 dm-types --version '>= 0.10.1' --source http://gems.github.com
 do_postgres
 dm-tags 
+dm-validations
+dm-timestamps
+sanitize
+bb-ruby
 sqlite3-ruby
 haml

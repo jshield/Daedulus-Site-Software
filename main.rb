@@ -7,9 +7,11 @@ require 'dm-types'
 require 'dm-tags'
 require 'dm-timestamps'
 require 'dm-validations'
+require 'sanitize'
 require 'haml'
 require 'sass'
 require 'date'
+require 'bb-ruby'
 require 'extensions/auth.rb'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:./my.db')
@@ -41,7 +43,9 @@ end
 post '/forum/post' do
   
   if authorized?
-     post = Post.create(:user_id => params[:uid], :title => params[:title], :body => params[:body])
+     title = Sanitize.clean(params[:title])
+     body = Sanitize.clean(params[:body])
+     post = Post.create(:user_id => params[:uid], :title => title, :body => body)
      post.parent_id = params[:pid] if defined?(params[:pid])
     if post.valid? 
       post.save
@@ -52,26 +56,6 @@ post '/forum/post' do
   else
     redirect request.referer
   end
-end
-
-post '/forum/reply/:pid' do
-
-end
-
-get '/debug/reset-database' do
-  DataMapper.auto_migrate!
-end
-
-get 'debug/dump-database' do
-
-end
-
-get '/debug/auth' do
-  if authorized?
-    "Authorized!"
-  else
-    "Access Denied!"
-  end  
 end
 
 get '/css/yui' do

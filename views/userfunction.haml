@@ -1,4 +1,8 @@
 :javascript    
+  function validate_registration() {
+  alert("validad");
+  return true;
+  };
   $(document).ready(function() {
   $('form.login').hide();
   $('form.register').hide();
@@ -17,8 +21,10 @@
       $('a.npst').hide();
       $('form.npst').show('slow');
     });
-    $('input.button.register').click(function() {
-      validate_registration();
+    $('#form_register').submit(function() {
+      if (validate_registration() == true) {
+      return true;
+      }
     });
     $('a.reply').click(function(){
      id = $(this).attr("name");

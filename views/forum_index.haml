@@ -14,16 +14,14 @@
     #mainbox
       #content.box.sml
         %h2
-          - unless @child == true
-            %b Test Forum       
-          - if @child == true
-            %b= @posts.first.title 
+          %b Test Forum       
         #stuff        
-          - @posts.each do |pt|
-            #topic
-              #ttime
-                %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}"
-              #ttitle
-                %p= "<a href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
-              #tposter  
-                %p= "<a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a>"
+          - if defined?@posts
+            - @posts.each do |pt| 
+              #topic
+                #ttime
+                  %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}" 
+                #ttitle
+                  %p= "<a href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
+                #tposter  
+                  %p= "<a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a>"

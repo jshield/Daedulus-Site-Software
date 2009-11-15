@@ -36,7 +36,7 @@ module Sinatra
 
       app.post '/user/login' do
           user = User.first(:uname => params[:user])
-          unless user == nil
+          unless user == nil 
             puts params[:pass]
             if user.password == params[:pass]
               session[:authorized] = true
