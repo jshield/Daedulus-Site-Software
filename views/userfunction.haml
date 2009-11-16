@@ -70,8 +70,22 @@
       id = $(this).attr("name");
       qid = $(this).attr("quote");
       $('p.links').hide();
-      $('form.npst').load("/api/quote/raw/" + qid );
+      $('form.npst').load("/api/post/quote/form/" + qid );
       $('a.npst').click();
+    });
+    
+    $('a.update').click(function() {
+    id = $(this).attr("name");
+    $('form.npst').load("/api/post/update/form/" + id );
+    $('p.links').hide();   
+    $('a.npst').click();
+    });
+    $('a.delete').click(function() {
+      id = $(this).attr("name");
+      if(confirm("Delete this post?")) {
+        $("#reply-" + id).load("/api/post/delete/"+id);
+      }
+    
     });
   });
 

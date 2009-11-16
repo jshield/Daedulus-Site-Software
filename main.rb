@@ -7,6 +7,7 @@ require 'dm-types'
 require 'dm-tags'
 require 'dm-timestamps'
 require 'dm-validations'
+require 'dm-serializer'
 require 'sanitize'
 require 'haml'
 require 'sass'
@@ -44,9 +45,14 @@ post '/forum/post' do
   
   if authorized?
      title = Sanitize.clean(params[:title])
-     body = Sanitize.clean(params[:body])
-     post = Post.create(:user_id => session[:uid], :title => title, :body => body)
-     post.parent_id = params[:pid] if defined?(params[:pid])
+     body = Sanitize.clean(params[:body]).gsub("&#13;","")
+     if defined?(params[:upid])
+      post = Post.get(params[:upid])
+      post.update_attributes(:title => title, :body => body)
+     else
+      post = Post.create(:user_id => session[:uid], :title => title, :body => body)
+      post.parent_id = params[:pid] if defined?(params[:pid])
+    end
     if post.valid? 
       post.save
       redirect "/forum/post/#{post.root.id}"
@@ -69,7 +75,7 @@ get '/' do
 end
 
 get '/forum' do
-  @posts = Post.roots.last(5)
+  @posts = Post.roots.last(50)
   haml :forum_index
 end
 
@@ -83,8 +89,33 @@ get '/forum/post/:pid' do |p|
   end
 end
 
-get '/api/quote/raw/:qid' do |q|
-  @quote = Post.get(q)
+get '/api/post/delete/:pid' do |p|
+   post = Post.get(p)
+   if authorized? and post.user.id == session[:uid]
+     post.children.each do |pt|
+      if pt.id == post.children.first.id
+        repository(:default).adapter.query("UPDATE posts SET parent_id=NULL WHERE id = #{pt.id}")  
+      else
+        repository(:default).adapter.query("UPDATE posts SET parent_id=#{post.children.first.id} WHERE id = #{pt.id}") 
+      end        
+     end
+     post = Post.get(p)
+     post.destroy
+    "Post #{p} deleted"
+   end
+end
+
+get '/api/post/update/form/:pid' do |p|
+  if authorized?
+    @post = Post.get(p)
+    haml :update_form
+  else
+    "<span>Not Authorized!</span>"
+  end
+end
+
+get '/api/post/quote/form/:pid' do |p|
+  @quote = Post.get(p)
   haml :quote_form
 
 end
