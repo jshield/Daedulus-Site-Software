@@ -37,13 +37,20 @@
           %a.register{:href => "#"}
             Register
         %form.register{:method => "POST", :id => "form_register", :action => "/user/register" }
-          %input{ :type => "text", :name => "user", :value => "Username"}
+          %span.username
+          %input.register.user{ :type => "text", :name => "user", :value => "Username"}
           %br
-          %input{ :type => "text", :name => "disp", :value => "Display Name"}
+          %span.dispname
+          %input.register.disp{ :type => "text", :name => "disp", :value => "Display Name"}
           %br
-          %input{ :type => "email", :name => "email", :value => "Email Address"}
+          %span.email
+          %input.register.email{ :type => "email", :name => "email", :value => "Email Address"}
           %br
-          %input{ :type => "password", :name => "pass", :value => "Password"}
+          %span.pass
+          %input.register.pass{ :type => "password", :name => "pass", :value => "Password"}
           %br
-          %input.button.register{ :type => "submit", :name => "submit", :value => "Register"}
+          %span.pass2
+          %input.register.pass2{ :type => "password", :name => "pass2", :value => "Password"}
+          %br
+          %input.register.submit{ :type => "submit", :name => "submit", :value => "Register"}
           

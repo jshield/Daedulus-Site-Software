@@ -1,36 +1,62 @@
-:javascript    
-  function validate_registration() {
-  alert("validad");
-  return true;
-  };
+:javascript 
   $(document).ready(function() {
-  $('form.login').hide();
-  $('form.register').hide();
-  $('form.npst').hide();
+    $('span').hide();
+    $('form').hide();  
+    
+    function flash(span, msg) {
+      $("span." + span).css("color","red");
+      $("span." + span).text(msg).show().fadeOut(2000);
+    };
+       
     $('a.login').click(function() {
       $('a.login').hide();
       $('a.register').hide(); 
       $('form.login').show('slow');
     });
+    
     $('a.register').click(function() {
       $('a.login').hide(); 
       $('a.register').hide(); 
       $('form.register').show('slow');
     });
+    
     $('a.npst').click(function() {
       $('a.npst').hide();
       $('form.npst').show('slow');
     });
+    
     $('#form_register').submit(function() {
-      if (validate_registration() == true) {
-      return true;
-      }
+      if ($("input.register.user").val() == "Username") {
+        flash("username", "!");
+        fail = true;
+      };
+      if ($("input.register.disp").val() == "Display Name") {
+        flash("dispname", "!");
+        fail = true;
+      };
+      if ($("input.register.email").val() == "Email Address") {
+        flash("email", "!");
+        fail = true;
+      };
+      if ($("input.register.pass").val() == "Password") {
+        flash("pass", "!");
+        fail = true;
+      };
+      if ($("input.register.pass2").val() != $("input.register.pass").val()) {
+        flash("pass2", "!=");
+        fail = true;
+      };
+      if (fail == true) {return false;};
+      
     });
+    
     $('a.reply').click(function(){
      id = $(this).attr("name");
      $('p.links').hide();
+     $('#mainbox').slideUp(1000);
      $('form.npst').append("<input type ='hidden' name='pid' value='" + id + "'>");
      $('a.npst').click();
+     $('#mainbox').slideDown(1000);
     });
   });
 

@@ -16,7 +16,7 @@ module Sinatra
         session[:authorized] = false
       end
     end
-
+    
     def self.registered(app)
       app.helpers SessionAuth::Helpers
       
@@ -60,6 +60,27 @@ module Sinatra
           redirect '/user/error/register'
         end
       end
+      
+     app.get '/user/list' do
+      output = "Users in System<br>"
+      User.all.each do |user|
+      output = output + user.id.to_s + " " + user.name + "<br>"
+      end
+      
+       output
+    end
+    
+    app.get '/user/:id/profile' do
+    
+    end
+    
+    app.get '/user/profile' do
+      if authorized?
+      
+      else
+      redirect request.referer
+      end
+    end
     end
   end
 
