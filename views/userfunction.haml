@@ -62,6 +62,7 @@
       id = $(this).attr("name");
       $('p.links').hide();
       $('form.npst').append("<input class ='npst pid' type ='hidden' name='pid' value='" + id + "'>");
+      $('input.npst.title').val( "Re: " + $('b.title').text());
       $('a.npst').click();
     });
   });

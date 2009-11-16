@@ -14,7 +14,7 @@
     #mainbox
       #content.box.sml
         %h2
-          %b= @posts.first.title 
+          %b.title= @posts.first.title 
         #stuff        
           - @posts.each do |pt|
             #reply

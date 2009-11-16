@@ -14,9 +14,9 @@
           %a.npst{:href => "#"}
             Post New Topic
         %form.npst{:method => "POST", :name => "form_post", :action => "/forum/post" }
-          %input{:type => "text", :name => "title", :value => "Topic Name"}
+          %input.npst.title{:type => "text", :name => "title", :value => "Topic Name"}
           %br
-          %textarea{:cols => 40, :rows => 10, :name => "body"}
+          %textarea.npst.body{:cols => 40, :rows => 10, :name => "body"}
           %br
           %input.button.npst.submit{:type => "submit", :name => "submit", :value => "Post"}
           %input.button.npst.cancel{ :type => "button", :name => "submit", :value => "Cancel"}
