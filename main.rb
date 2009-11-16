@@ -46,7 +46,7 @@ post '/forum/post' do
   if authorized?
      title = Sanitize.clean(params[:title])
      body = Sanitize.clean(params[:body]).gsub("&#13;","")
-     if defined?(params[:upid])
+     if (params[:upid] != nil)
       post = Post.get(params[:upid])
       post.update_attributes(:title => title, :body => body)
      else
