@@ -45,11 +45,12 @@ post '/forum/post' do
   if authorized?
      title = Sanitize.clean(params[:title])
      body = Sanitize.clean(params[:body])
-     post = Post.create(:user_id => params[:uid], :title => title, :body => body)
+     post = Post.create(:user_id => session[:id], :title => title, :body => body)
      post.parent_id = params[:pid] if defined?(params[:pid])
     if post.valid? 
       post.save
-      redirect "/forum/post/#{post.id}"
+      redirect "/forum/post/#{post.id}" unless defined?(post.parent)
+      redirect "/forum/post/#{post.parent.id}"
     else
       redirect request.referer
     end

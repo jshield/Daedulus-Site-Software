@@ -11,18 +11,18 @@
     $('a.login').click(function() {
       $('a.login').hide();
       $('a.register').hide(); 
-      $('form.login').show('slow');
+      $('form.login').slideDown('500');
     });
     
     $('a.register').click(function() {
       $('a.login').hide(); 
       $('a.register').hide(); 
-      $('form.register').show('slow');
+      $('form.register').slideDown('500');
     });
     
     $('a.npst').click(function() {
       $('a.npst').hide();
-      $('form.npst').show('slow');
+      $('form.npst').slideDown('500');
     });
     
     $('#form_register').submit(function() {
@@ -46,17 +46,23 @@
         flash("pass2", "!=");
         fail = true;
       };
-      if (fail == true) {return false;};
-      
+      if (fail == true) {return false;};      
+    });
+    
+    $('input.cancel').click(function() {
+     $('form').slideUp(500);
+     $('a.npst').show();
+     $('a.login').show();
+     $('a.register').show();
+     $('input.npst.pid').remove();
+     $('p.links').fadeIn(100);
     });
     
     $('a.reply').click(function(){
-     id = $(this).attr("name");
-     $('p.links').hide();
-     $('#mainbox').slideUp(1000);
-     $('form.npst').append("<input type ='hidden' name='pid' value='" + id + "'>");
-     $('a.npst').click();
-     $('#mainbox').slideDown(1000);
+      id = $(this).attr("name");
+      $('p.links').hide();
+      $('form.npst').append("<input class ='npst pid' type ='hidden' name='pid' value='" + id + "'>");
+      $('a.npst').click();
     });
   });
 
