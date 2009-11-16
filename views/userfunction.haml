@@ -2,7 +2,7 @@
   $(document).ready(function() {
     $('span').hide();
     $('form').hide();  
-    
+    $('span.pbody').show();
     function flash(span, msg) {
       $("span." + span).css("color","red");
       $("span." + span).text(msg).show().fadeOut(2000);
@@ -63,6 +63,14 @@
       $('p.links').hide();
       $('form.npst').append("<input class ='npst pid' type ='hidden' name='pid' value='" + id + "'>");
       $('input.npst.title').val( "Re: " + $('b.title').text());
+      $('a.npst').click();
+    });
+    
+    $('a.quote').click(function() {
+      id = $(this).attr("name");
+      qid = $(this).attr("quote");
+      $('p.links').hide();
+      $('form.npst').load("/api/quote/raw/" + qid );
       $('a.npst').click();
     });
   });

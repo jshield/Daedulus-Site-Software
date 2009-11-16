@@ -49,8 +49,7 @@ post '/forum/post' do
      post.parent_id = params[:pid] if defined?(params[:pid])
     if post.valid? 
       post.save
-      redirect "/forum/post/#{post.id}" unless defined?(post.parent.id)
-      redirect "/forum/post/#{post.parent.id}"
+      redirect "/forum/post/#{post.root.id}"
     else
       redirect request.referer
     end
@@ -82,5 +81,11 @@ get '/forum/post/:pid' do |p|
   else
    redirect "/forum/"
   end
+end
+
+get '/api/quote/raw/:qid' do |q|
+  @quote = Post.get(q)
+  haml :quote_form
+
 end
 

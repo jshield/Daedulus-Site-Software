@@ -19,16 +19,24 @@
           - @posts.each do |pt|
             #reply
               - unless pt == @posts.first 
-                %h3.title= "<a class =\"title\" href=\"/forum/post/#{pt.id}\">#{pt.title}</a>"
+                %h3.title= "<a class =\"title\" name = \"#post-#{pt.id}\">#{pt.title}</a>"
               - else
-                %h3.title= "TOP POST"
+                %h3.title= "<a class = \"title\" name = \"#top\">TOP POST</a>"
               %p.by= "by <a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%H:%M")}"
-              %p.body= pt.body.bbcode_to_html
+              #body
+                %span.pbody{:id => "body-#{pt.id}"}= pt.body.bbcode_to_html
               - if authorized?
                 %p.links
                   %a.report{:href => "#" }
                     Report
                   |
-                  %a.reply{:href => "#", :name => pt.id}
+                  %a.quote{:href => "#", :name => @posts.first.id, :quote => pt.id}
                     Reply
+          #end{:style => "width:100%"}
+            %p.end{:style => "text-align:right;padding-right:40px;"}
+              %a.reply{:href => "#", :name => @posts.first.id}
+                Reply to Topic
+              |
+              %a{:href => "#top"}
+                Return to Top
               
