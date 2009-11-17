@@ -34,13 +34,6 @@ get '/css/a' do
   sass :a
 end
 
-get '/debug/run-tests' do
-  user = User.create(:name => "James Alexander Shield", :uname => "test", :email => "test@test.dan", :password => "testpass")
-  post = user.post.create(:title => "Test Post", :body => "Test Body")
-  post.children.create(:title => "Test Reply", :body => "Test Reply Body", :user_id => user.id)
-  user.save
-end
-
 post '/forum/post' do
   
   if authorized?
@@ -75,7 +68,7 @@ get '/' do
 end
 
 get '/forum' do
-  @posts = Post.roots.last(50)
+  @posts = Post.all.reverse
   haml :forum_index
 end
 
