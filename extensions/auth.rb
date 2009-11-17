@@ -20,9 +20,8 @@ module Sinatra
     def self.registered(app)
       app.helpers SessionAuth::Helpers
       
-      app.get '/user/logout' do
+      app.post '/user/logout' do
         logout!
-        redirect request.referer
       end
       
       app.get '/user/error/:reason' do
@@ -41,13 +40,11 @@ module Sinatra
             if user.password == params[:pass]
               session[:authorized] = true
               session[:uid] = user.id
-              redirect request.referer
             else
-            redirect '/user/error/pass'
+              session[:authorized] = false
             end
         else
           session[:authorized] = false
-          redirect '/user/error/user'
         end
       end
       
@@ -74,15 +71,17 @@ module Sinatra
     
     end
     
-    app.get '/user/profile' do
+    app.get '/api/user/profile/haml/:uid' do |u|
       if authorized?
-      
+        @user = User.get!(u)
+        haml :user_profile
       else
-      redirect request.referer
+      
       end
     end
-    end
+    
   end
+end
 
   register SessionAuth
 end

@@ -2,30 +2,22 @@
   $(document).ready(function() {
     $('span').hide();
     $('form').hide();  
-    $('span.pbody').show();
+    $('span.pbody').show();           
+  });
+  
     function flash(span, msg) {
       $("span." + span).css("color","red");
       $("span." + span).text(msg).show().fadeOut(2000);
     };
-       
-    $('a.login').click(function() {
+           
+    function showForm(form) {
       $('a.login').hide();
-      $('a.register').hide(); 
-      $('form.login').slideDown('500');
-    });
-    
-    $('a.register').click(function() {
-      $('a.login').hide(); 
-      $('a.register').hide(); 
-      $('form.register').slideDown('500');
-    });
-    
-    $('a.npst').click(function() {
+      $('a.register').hide();
       $('a.npst').hide();
-      $('form.npst').slideDown('500');
-    });
-    
-    $('#form_register').submit(function() {
+      $('form.'+form).slideDown('500');
+    };
+
+    function validate_registeration() {
       if ($("input.register.user").val() == "Username") {
         flash("username", "!");
         fail = true;
@@ -47,10 +39,8 @@
         fail = true;
       };
       if (fail == true) {return false;};      
-    });
-           
-  });
-  
+    };
+    
     function loadIndex() {
      $('#mainbox').hide();
      $('#mainbox').load('/api/topic/list/haml');
@@ -63,6 +53,29 @@
      $('#mainbox').fadeIn(2000);
     };
     
+    function loadProfile(id) {
+     $('#mainbox').hide();
+     $('#mainbox').load('/api/user/profile/haml/'+id);
+     $('#mainbox').fadeIn(2000);    
+    };
+    
+    function loadUserBox() {
+     $('#userbox').hide();
+     $('#userbox').load('/api/userbox');
+     $('span').hide();
+     $('form').hide();  
+     $('span.pbody').show();
+     $('#userbox').fadeIn(2000);     
+    };
+    
+    function loadPage(pagename) {
+     if (pagename == "forum") {
+      loadUserBox();
+      loadIndex();
+      return true;
+     }  
+    };
+    
     function cancel() {
      $('form').slideUp(500);
      $('a.npst').show();
@@ -71,6 +84,20 @@
      $('input.npst.pid').remove();
      $('input.npst.pid').remove();     
      $('p.links').fadeIn(100);
+    };
+    
+    function login() {
+     var auth = $('form.login').serialize();
+     $.post("/user/login",auth,function(data){
+     loadUserBox();
+     }); 
+    };
+    
+    function logout() {
+     var auth
+     $.post("/user/logout",auth,function(data){
+     loadUserBox();
+     }); 
     };
     
     function deletePost(id) {      

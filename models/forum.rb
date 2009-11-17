@@ -25,6 +25,8 @@ class User
                }
   property :custom_title, Text
   property :post_count, Integer
+  property :style, Enum[ :default, :compact ], :default => :default
+  property :color, Enum[ :default, :inverted ], :default => :default
   property :sig, Text
   property :sex, Enum[ :male, :female, :intersex, :undefined ], :default => :undefined
   property :dob, Date

@@ -1,4 +1,4 @@
-#menu
+#mainmenu
   %h1
     %a{ :href => "/" }
       %b
@@ -7,14 +7,8 @@
   %div
     %ul
       %li
-        %a{ :href => "/" }
+        %a{ :href => "#", :onclick => "loadPage('main');" }
           MAIN
       %li
-        %a{ :href => "/projects" }
-          PROJECTS
-      %li
-        %a{ :href => "/blog" }
-          BLOG
-      %li
-        %a{ :href => "/forum" }
+        %a{ :href => "#", :onclick => "loadPage('forum');" }
           FORUM

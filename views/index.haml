@@ -1,41 +1,19 @@
 !!! Strict
 %html{ "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
   %head
-    %meta{ :content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
     %title
       DAEDBOX
     %meta{ :content => "no", "http-equiv" => "imagetoolbar" }
-    %link{ :href => "/css/a", :rel => "stylesheet", :media => "screen", :type => "text/css" }
+    %link{ :href => "/css/theme", :rel => "stylesheet", :media => "screen", :type => "text/css" }
     %script{ :src => "http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js", :type =>"text/javascript"}
+    = haml :userfunction    
   %body
-    #mainmenu
-      %h1
-        %a{ :href => "/" }
-          %b
-            DAED
-          BOX
-      %div
-        %ul
-          %li.cur
-            %a{ :href => "/" }
-              MAIN
-          %li
-            %a{ :href => "/projects" }
-              PROJECTS
-          %li
-            %a{ :href => "/blog" }
-              BLOG
-          %li
-            %a{ :href => "/forum" }
-              FORUM
+    = haml :mainmenu
 
     #userbox
       .box.large.left
         %h2
           %b= @date
-    #bg
-      %div
-        %table{ :cellspacing => "0", :cellpadding => "0" }
-          %tr
-            %td
+    #mainbox
+
 

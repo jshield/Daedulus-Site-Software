@@ -29,9 +29,16 @@ enable :sessions
 set :environment, :development
 set :public, "./public"
 
-get '/css/a' do
+get '/css/theme' do
   content_type 'text/css', :charset => 'utf-8'  
-  sass :a
+  if authorized?
+    case @user.style
+      when 1 then sass :style_default
+      when 2 then sass :style_inverted
+      else sass :style_default
+    end
+  end
+  sass :style_default
 end
 
 post '/forum/post' do
@@ -57,10 +64,6 @@ post '/forum/post' do
   end
 end
 
-get '/css/yui' do
-  content_type 'text/css', :charset => 'utf-8'
-  sass :yui_reset
-end
 
 get '/' do
   @date = DateTime.now.strftime("%D")
@@ -78,7 +81,7 @@ get '/forum/post/:pid' do |p|
   @posts = @posts.to_a + @posts.children.to_a
     haml :forum_post
   else
-   redirect "/forum/"
+   redirect "/forum"
   end
 end
 
@@ -137,5 +140,9 @@ get '/api/post/quote/form/:pid' do |p|
   else
      "<span>Not Authorized!</span>"
   end
+end
+
+get '/api/userbox' do |p|
+  haml :userbox
 end
 

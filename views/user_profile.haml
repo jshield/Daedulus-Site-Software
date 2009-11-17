@@ -1,0 +1,6 @@
+#content.box
+  %h2
+    %b= "User: " + @user.name
+  #stuff
+    %p
+      %b= "Registered on the " + @user.created_at.strftime("%D") + " at " + @user.created_at.strftime("%H:%M")
