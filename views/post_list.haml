@@ -16,7 +16,7 @@
           %h3.title= "<a class =\"title\" name = \"#post-#{pt.id}\">#{pt.title}</a>"
         - else
           %h3.title= "<a class = \"title\" name = \"#post-#{pt.id}\">TOP POST</a>"
-        %p.by= "by <a href=\"#\" class=\"profile\" name=\"#{pt.user.id}\"> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%H:%M")}"
+        %p.by= "by <a href=\"#\" class=\"profile\" onclick=\"loadProfile(#{pt.user.id});\">#{pt.user.name}</a> on the #{pt.created_at.strftime("%D")} at #{pt.created_at.strftime("%H:%M")}"
         #body                
           %span.pbody{:id => "body-#{pt.id}"}= pt.body.bbcode_to_html
         - if authorized?
@@ -33,11 +33,11 @@
             |
             %a.quote{:href => "#", :onclick=>"quotePost(#{pt.id})"}
               Reply
-      #end{:style => "width:100%"}
-        %p.end{:style => "text-align:right;padding-right:40px;"}
-          %a{:name => "last"}
-          %a.reply{:href => "#", :onclick => "replyTopic(#{@posts.first.id});"}
-            Reply to Topic
-          |
-          %a{:href => "#top"}
-            Return to Top
+    #end{:style => "width:100%"}
+      %p.end{:style => "text-align:right;padding-right:40px;"}
+        %a{:name => "last"}
+        %a.reply{:href => "#", :onclick => "replyTopic(#{@posts.first.id});"}
+          Reply to Topic
+        |
+        %a{:href => "#top"}
+          Return to Top
