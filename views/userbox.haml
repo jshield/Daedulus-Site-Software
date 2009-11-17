@@ -19,7 +19,7 @@
           %textarea.npst.body{:cols => 40, :rows => 10, :name => "body"}
           %br
           %input.button.npst.submit{:type => "submit", :name => "submit", :value => "Post"}
-          %input.button.npst.cancel{ :type => "button", :name => "submit", :value => "Cancel"}
+          %input.button.npst.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}
         %li
           %a{:href => "/user/logout"} 
             Logout
@@ -33,7 +33,7 @@
           %input{ :type => "password", :name => "pass", :value => "Password"}
           %br
           %input.button.login{ :type => "submit", :name => "submit", :value => "Login"}
-          %input.button.login.cancel{ :type => "button", :name => "submit", :value => "Cancel"}
+          %input.button.login.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}
         %li
           %a.register{:href => "#"}
             Register
@@ -54,5 +54,5 @@
           %input.register.pass2{ :type => "password", :name => "pass2", :value => "Password"}
           %br
           %input.button.register.submit{ :type => "submit", :name => "submit", :value => "Register"}
-          %input.button.register.cancel{ :type => "button", :name => "submit", :value => "Cancel"}
+          %input.button.register.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}
           

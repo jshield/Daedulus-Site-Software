@@ -48,54 +48,51 @@
       };
       if (fail == true) {return false;};      
     });
+           
+  });
+  
+    function loadIndex() {
+     $('#mainbox').hide();
+     $('#mainbox').load('/api/topic/list/haml');
+     $('#mainbox').fadeIn(2000);
+    };
     
-    $('a.reply').click(function(){
-      id = $(this).attr("name");
-      $('p.links').hide();
-      $('form.npst').load("/api/post/reply/form/" + id);
-      $('a.npst').click();
-    });
+    function loadTopic(id) {
+     $('#mainbox').hide();
+     $('#mainbox').load('/api/post/list/haml/'+id);
+     $('#mainbox').fadeIn(2000);
+    };
     
-    $('a.quote').click(function() {
-      id = $(this).attr("name");
-      qid = $(this).attr("quote");
-      $('p.links').hide();
-      $('form.npst').load("/api/post/quote/form/" + qid );
-      $('a.npst').click();
-    });
-    
-    $('a.update').click(function() {
-    id = $(this).attr("name");
-    $('form.npst').load("/api/post/update/form/" + id );
-    $('p.links').hide();   
-    $('a.npst').click();
-    });
-    $('a.delete').click(function() {
-      id = $(this).attr("name");
-      if(confirm("Delete this post?")) {
-        $("#reply-" + id).load("/api/post/delete/"+id);
-      }
-    
-    });
-    
-   $('input.cancel').click(function() {
+    function cancel() {
      $('form').slideUp(500);
      $('a.npst').show();
      $('a.login').show();
      $('a.register').show();
      $('input.npst.pid').remove();
+     $('input.npst.pid').remove();     
      $('p.links').fadeIn(100);
-    });   
-  });
-    function loadIndex() {
-    $('#mainbox').hide();
-    $('#mainbox').load('/api/topic/list/haml');
-    $('#mainbox').fadeIn(2000);
     };
     
-    function loadTopic(id) {
-    $('#mainbox').hide();
-    $('#mainbox').load('/api/post/list/haml/'+id);
-    $('#mainbox').fadeIn(2000);
+    function deletePost(id) {      
+      if(confirm("Delete this post?")) {
+        $("#reply-" + id).load("/api/post/delete/"+id);
+      }    
+    };
+    
+    function updatePost(id) {
+    $('form.npst').load("/api/post/update/form/" + id );
+    $('p.links').hide();   
+    $('a.npst').click();
     };
 
+    function replyTopic(id){
+      $('p.links').hide();
+      $('form.npst').load("/api/post/reply/form/" + id );
+      $('a.npst').click();
+    };
+    
+    function quotePost(id) {
+      $('p.links').hide();
+      $('form.npst').load("/api/post/quote/form/" + id );
+      $('a.npst').click();
+    };

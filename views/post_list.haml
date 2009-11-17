@@ -22,21 +22,21 @@
         - if authorized?
           %p.links
             - if pt.user_id == session[:uid]
-              %a.delete{:href=>"#",:name =>pt.id}
+              %a.delete{:href=>"#",:onclick=>"deletePost(#{pt.id});"}
                 Delete
               |
-              %a.update{:href=>"#",:name =>pt.id}
+              %a.update{:href=>"#",:onclick=> "updatePost(#{pt.id});"}
                 Edit
               |
             %a.report{:href => "#" }
               Report
             |
-            %a.quote{:href => "#", :name => @posts.first.id, :quote => pt.id}
+            %a.quote{:href => "#", :onclick=>"quotePost(#{pt.id})"}
               Reply
       #end{:style => "width:100%"}
         %p.end{:style => "text-align:right;padding-right:40px;"}
           %a{:name => "last"}
-          %a.reply{:href => "#", :name => @posts.first.id}
+          %a.reply{:href => "#", :onclick => "replyTopic(#{@posts.first.id});"}
             Reply to Topic
           |
           %a{:href => "#top"}
