@@ -98,18 +98,44 @@ get '/api/post/delete/:pid' do |p|
    end
 end
 
-get '/api/post/update/form/:pid' do |p|
+get '/api/post/reply/form/:pid' do |p|
+  @post = Post.get!(p)
   if authorized?
-    @post = Post.get(p)
+    haml :reply_form
+  else
+  
+  end  
+end
+
+get '/api/post/update/form/:pid' do |p|
+  @post = Post.get!(p)
+  if authorized? and @post.user.id == session[:uid]
     haml :update_form
   else
     "<span>Not Authorized!</span>"
   end
 end
 
-get '/api/post/quote/form/:pid' do |p|
-  @quote = Post.get(p)
-  haml :quote_form
+get '/api/post/list/haml/:pid' do |p|
+  @posts = Post.get(p)
+  unless @posts == nil
+  @posts = @posts.to_a + @posts.children.to_a
+    haml :post_list
+  else
+  end
+end
 
+get '/api/topic/list/haml' do
+  @posts = Post.all.reverse
+  haml :topic_list
+end
+
+get '/api/post/quote/form/:pid' do |p|
+  if authorized?
+    @quote = Post.get!(p)
+    haml :quote_form
+  else
+     "<span>Not Authorized!</span>"
+  end
 end
 

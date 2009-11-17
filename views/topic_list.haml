@@ -1,0 +1,25 @@
+#content.box.sml
+  %h2
+    %b Test Forum       
+  #stuff        
+    - if defined?@posts
+      - @posts.each do |pt|             
+        - if pt == pt.root.children.last            
+          #topic
+            #ttime
+              %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}"                   
+            #ttitle
+              %p= "<a href=\"#\" class=\"topic\" onclick=\"loadTopic(#{pt.root.id});\">#{pt.root.title}</a>"
+            #tposter  
+              %p= "<a href=\"#\" class=\"profile\" name=\"#{pt.user.id}\">#{pt.user.name}</a>"
+        - elsif pt == pt.root
+          - begin Post.get!(pt.children.last.id)
+            = ""               
+          - rescue DataMapper::ObjectNotFoundError
+            #topic
+              #ttime
+                %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}"                   
+              #ttitle
+                %p= "<a href=\"#\" class=\"topic\" onclick=\"loadTopic(#{pt.root.id});\">#{pt.root.title}</a>"
+              #tposter  
+                %p= "<a href=\"#\" class=\"profile\" name=\"#{pt.user.id}\">#{pt.user.name}</a>"

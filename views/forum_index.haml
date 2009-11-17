@@ -12,28 +12,4 @@
     = haml :mainmenu
     = haml :userbox
     #mainbox
-      #content.box.sml
-        %h2
-          %b Test Forum       
-        #stuff        
-          - if defined?@posts
-            - @posts.each do |pt|             
-              - if pt == pt.root.children.last            
-                #topic
-                  #ttime
-                    %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}"                   
-                  #ttitle
-                    %p= "<a href=\"/forum/post/#{pt.root.id}\">#{pt.root.title}</a>"
-                  #tposter  
-                    %p= "<a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a>"
-              - elsif pt == pt.root
-                - begin Post.get!(pt.children.last.id)
-                  - puts ""               
-                - rescue DataMapper::ObjectNotFoundError
-                  #topic
-                    #ttime
-                      %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}"                   
-                    #ttitle
-                      %p= "<a href=\"/forum/post/#{pt.root.id}\">#{pt.root.title}</a>"
-                    #tposter  
-                      %p= "<a href=\"/user/#{pt.user.id}/profile\">#{pt.user.name}</a>"   
+      = haml :topic_list

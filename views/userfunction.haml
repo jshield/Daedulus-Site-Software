@@ -49,20 +49,10 @@
       if (fail == true) {return false;};      
     });
     
-    $('input.cancel').click(function() {
-     $('form').slideUp(500);
-     $('a.npst').show();
-     $('a.login').show();
-     $('a.register').show();
-     $('input.npst.pid').remove();
-     $('p.links').fadeIn(100);
-    });
-    
     $('a.reply').click(function(){
       id = $(this).attr("name");
       $('p.links').hide();
-      $('form.npst').append("<input class ='npst pid' type ='hidden' name='pid' value='" + id + "'>");
-      $('input.npst.title').val( "Re: " + $('b.title').text());
+      $('form.npst').load("/api/post/reply/form/" + id);
       $('a.npst').click();
     });
     
@@ -87,5 +77,25 @@
       }
     
     });
+    
+   $('input.cancel').click(function() {
+     $('form').slideUp(500);
+     $('a.npst').show();
+     $('a.login').show();
+     $('a.register').show();
+     $('input.npst.pid').remove();
+     $('p.links').fadeIn(100);
+    });   
   });
+    function loadIndex() {
+    $('#mainbox').hide();
+    $('#mainbox').load('/api/topic/list/haml');
+    $('#mainbox').fadeIn(2000);
+    };
+    
+    function loadTopic(id) {
+    $('#mainbox').hide();
+    $('#mainbox').load('/api/post/list/haml/'+id);
+    $('#mainbox').fadeIn(2000);
+    };
 
