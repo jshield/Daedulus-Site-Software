@@ -43,29 +43,33 @@
     
     function loadIndex() {
      $('#mainbox').hide();
-     $('#mainbox').load('/api/topic/list/haml');
+     $('#mainbox').load('/api/topic/list/haml',null,function() {
      $('#mainbox').fadeIn(2000);
+     });
     };
     
     function loadTopic(id) {
      $('#mainbox').hide();
-     $('#mainbox').load('/api/post/list/haml/'+id);
+     $('#mainbox').load('/api/post/list/haml/'+id,null,function() {
      $('#mainbox').fadeIn(2000);
+     });
     };
     
     function loadProfile(id) {
      $('#mainbox').hide();
-     $('#mainbox').load('/api/user/profile/haml/'+id);
-     $('#mainbox').fadeIn(2000);    
+     $('#mainbox').load('/api/user/profile/haml/'+id,null,function() {
+     $('#mainbox').fadeIn(2000);
+     });    
     };
     
     function loadUserBox() {
      $('#userbox').hide();
-     $('#userbox').load('/api/userbox');
+     $('#userbox').load('/api/userbox',null,function() {
      $('span').hide();
      $('form').hide();  
      $('span.pbody').show();
-     $('#userbox').fadeIn(2000);     
+     $('#userbox').fadeIn(2000);  
+     });
     };
     
     function loadPage(pagename) {
@@ -107,19 +111,23 @@
     };
     
     function updatePost(id) {
-    $('form.npst').load("/api/post/update/form/" + id );
-    $('p.links').hide();   
-    $('a.npst').click();
+    $('form.npst').load("/api/post/update/form/" + id,null,function() {
+      $('p.links').hide();
+      $('a.npst').click();
+      });
     };
 
     function replyTopic(id){
+      $('form.npst').load("/api/post/reply/form/" + id ,null,function() {
       $('p.links').hide();
-      $('form.npst').load("/api/post/reply/form/" + id );
       $('a.npst').click();
+      });
+
     };
     
     function quotePost(id) {
+      $('form.npst').load("/api/post/quote/form/" + id,null,function() {
       $('p.links').hide();
-      $('form.npst').load("/api/post/quote/form/" + id );
       $('a.npst').click();
+      });
     };

@@ -55,12 +55,7 @@ post '/forum/post' do
     end
     if post.valid? 
       post.save
-      redirect "/forum/post/#{post.root.id}"
-    else
-      redirect request.referer
     end
-  else
-    redirect request.referer
   end
 end
 
