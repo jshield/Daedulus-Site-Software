@@ -12,7 +12,7 @@ require 'sanitize'
 require 'haml'
 require 'sass'
 require 'date'
-require 'bb-ruby'
+require 'extensions/bbcode.rb'
 require 'extensions/auth.rb'
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:./my.db')

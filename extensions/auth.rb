@@ -66,11 +66,7 @@ module Sinatra
       
        output
     end
-    
-    app.get '/user/:id/profile' do
-    
-    end
-    
+        
     app.get '/api/user/profile/haml/:uid' do |u|
       if authorized?
         @user = User.get!(u)
