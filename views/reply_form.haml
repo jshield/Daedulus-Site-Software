@@ -3,5 +3,5 @@
 %br
 %textarea.npst.body{:cols => 40, :rows => 10, :name => "body"} 
 %br
-%input.button.npst.submit{:type => "submit", :name => "submit", :value => "Update"}
+%input.button.npst.submit{:type => "button", :name => "submit", :value => "Post", :onclick => "post(#{@post.root.id});"}
 %input.button.npst.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}

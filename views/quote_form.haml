@@ -3,5 +3,5 @@
 %br
 %textarea.npst.body{:cols => 40, :rows => 10, :name => "body"}= "[quote=\"[url=#post-#{@quote.id}]#{@quote.user.name} on the #{@quote.created_at.strftime("%D")} at #{@quote.created_at.strftime("%H:%M")}[/url]\"]#{@quote.body}[/quote]" 
 %br
-%input.button.npst.submit{:type => "submit", :name => "submit", :value => "Post"}
+%input.button.npst.submit{:type => "button", :name => "submit", :value => "Post", :onclick => "post(#{@quote.root.id});"}
 %input.button.npst.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}

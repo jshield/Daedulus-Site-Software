@@ -104,6 +104,22 @@
      }); 
     };
     
+    function post(id) {
+     var post = $('form.npst').serialize();
+     $.post("/forum/post",post,function(data){
+     loadTopic(id);
+     cancel();
+     }); 
+    };  
+    
+    function postTopic() {
+     var post = $('form.npst').serialize();
+     $.post("/forum/post",post,function(data){
+     loadIndex();
+     cancel();
+     }); 
+    };  
+      
     function deletePost(id) {      
       if(confirm("Delete this post?")) {
         $("#reply-" + id).load("/api/post/delete/"+id);
