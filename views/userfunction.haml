@@ -1,4 +1,5 @@
 :javascript 
+
   $(document).ready(function() {
     $('span').hide();
     $('form').hide();  
@@ -45,6 +46,7 @@
      $('#mainbox').hide();
      $('#mainbox').load('/api/topic/list/haml',null,function() {
      $('#mainbox').fadeIn(2000);
+     Page.last = "/api/topic/list/haml";
      });
     };
     
@@ -106,6 +108,7 @@
     
     function post(id) {
      var post = $('form.npst').serialize();
+     $('input.button.npst.submit').hide();
      $.post("/forum/post",post,function(data){
      loadTopic(id);
      cancel();

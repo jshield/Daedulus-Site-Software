@@ -137,7 +137,7 @@ get '/api/post/quote/form/:pid' do |p|
   end
 end
 
-get '/api/userbox' do |p|
+get '/api/userbox' do
   haml :userbox
 end
 

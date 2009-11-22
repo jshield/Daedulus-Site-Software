@@ -12,12 +12,12 @@
       %li
         %a.npst{:href => "#", :onclick => "showForm('login')", :onclick => "showForm('npst')"}
           Post New Topic
-      %form.npst{:method => "POST", :name => "form_post", :action => "/forum/post" }
+      %form.npst{:method => "POST", :name => "form_post", :action => "/forum/post", :onsubmit => "postTopic(1);" }
         %input.npst.title{:type => "text", :name => "title", :value => "Topic Name"}
         %br
         %textarea.npst.body{:cols => 40, :rows => 10, :name => "body"}
         %br
-        %input.button.npst.submit{:type => "button", :name => "submit", :value => "Post", :onclick => "postTopic();"}
+        %input.button.npst.submit{:type => "button", :name => "submit", :value => "Post", :onclick => "postTopic(0);"}
         %input.button.npst.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}
       %li
         %a.logout{:href => "#", :onclick => "logout();"} 
@@ -26,7 +26,7 @@
       %li
         %a.login{:href => "#", :onclick => "showForm('login')"}
           Login
-      %form.login{:method => "POST", :action => "/user/login" }
+      %form.login{:method => "POST", :action => "/user/login" ,:onsubmit => "login();"}
         %input{ :type => "text", :name => "user", :value => "Username"}
         %br
         %input{ :type => "password", :name => "pass", :value => "Password"}
