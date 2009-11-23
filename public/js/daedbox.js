@@ -97,6 +97,7 @@ function boxyform(form) {
     dialog = new Boxy(null, {
       title: form.title,
       modal: true,
+      show: false,
       closable: true,
       afterHide: function (d){dialog.unload(); dialog = null;},
       behaviours: function (d) {
@@ -110,7 +111,6 @@ function boxyform(form) {
           $.post("/api/" + form.name, d.find("#" + form.name).serialize(), function (data) {
             form.callback();
             dialog.hideAndUnload();
-            dialog = null;
           });
           return false;
         });       
@@ -118,8 +118,7 @@ function boxyform(form) {
     });
     dialog.setContent("<div style = \"min-width:100px; min-height:50px; text-align:right;\"><form id =\"" + form.name + "\"></form></div>");
     form.elem = $("#" + form.name);
-    form.elem.load(form.url,function (){dialog.center();});
-    
+    form.elem.load(form.url,function (){dialog.show();dialog.center();});
   };
 }
 
