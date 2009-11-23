@@ -36,8 +36,9 @@
     #end{:style => "width:100%"}
       %p.end{:style => "text-align:right;padding-right:40px;"}
         %a{:name => "last"}
-        %a.reply{:href => "#", :onclick => "showForm('reply',#{@posts.first.id});"}
-          Reply to Topic
-        |
+        - if authorized?
+          %a.reply{:href => "#", :onclick => "showForm('reply',#{@posts.first.id});"}
+            Reply to Topic
+          |
         %a{:href => "#top"}
           Return to Top
