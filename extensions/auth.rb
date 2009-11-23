@@ -32,8 +32,8 @@ module Sinatra
             else "Unknown Error!"
           end
       end
-
-      app.post '/user/login' do
+    
+      app.post '/api/login' do
           user = User.first(:uname => params[:user])
           unless user == nil 
             puts params[:pass]
@@ -47,14 +47,20 @@ module Sinatra
           session[:authorized] = false
         end
       end
-      
-      app.post '/user/register' do
+    
+    
+      app.get '/api/login' do
+        haml :user_login unless authorized?
+      end  
+    
+      app.get '/api/register' do
+        haml :register_form
+      end
+          
+      app.post '/api/register' do
         newuser = User.create(:uname => params[:user], :name => params[:disp], :email => params[:email], :password => params[:pass])
         if newuser.valid?
           newuser.save
-          redirect request.referer
-        else
-          redirect '/user/error/register'
         end
       end
       

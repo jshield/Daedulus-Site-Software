@@ -37,28 +37,15 @@ get '/css/theme' do
       when 2 then sass :style_inverted
       else sass :style_default
     end
+  else sass :style_default
   end
-  sass :style_default
-end
-
-post '/forum/post' do
   
-  if authorized?
-     title = Sanitize.clean(params[:title])
-     body = Sanitize.clean(params[:body]).gsub("&#13;","")
-     if (params[:upid] != nil)
-      post = Post.get(params[:upid])
-      post.update_attributes(:title => title, :body => body)
-     else
-      post = Post.create(:user_id => session[:uid], :title => title, :body => body)
-      post.parent_id = params[:pid] if defined?(params[:pid])
-    end
-    if post.valid? 
-      post.save
-    end
-  end
 end
 
+get '/css/boxy' do
+  content_type 'text/css', :charset => 'utf-8'
+  sass :boxy
+end
 
 get '/' do
   @date = DateTime.now.strftime("%D")
@@ -96,7 +83,7 @@ get '/api/post/delete/:pid' do |p|
    end
 end
 
-get '/api/post/reply/form/:pid' do |p|
+get '/api/reply/:pid' do |p|
   @post = Post.get!(p)
   if authorized?
     haml :reply_form
@@ -105,7 +92,7 @@ get '/api/post/reply/form/:pid' do |p|
   end  
 end
 
-get '/api/post/update/form/:pid' do |p|
+get '/api/update/:pid' do |p|
   @post = Post.get!(p)
   if authorized? and @post.user.id == session[:uid]
     haml :update_form
@@ -116,6 +103,7 @@ end
 
 get '/api/post/list/haml/:pid' do |p|
   @posts = Post.get(p)
+  @posts = @posts.root
   unless @posts == nil
   @posts = @posts.to_a + @posts.children.to_a
     haml :post_list
@@ -128,7 +116,7 @@ get '/api/topic/list/haml' do
   haml :topic_list
 end
 
-get '/api/post/quote/form/:pid' do |p|
+get '/api/quote/:pid' do |p|
   if authorized?
     @quote = Post.get!(p)
     haml :quote_form
@@ -141,3 +129,25 @@ get '/api/userbox' do
   haml :userbox
 end
 
+get '/api/npst' do
+  haml :topic_form if authorized?
+end
+
+['/api/npst','/api/quote','/api/reply', '/api/update'].each do |m|
+  post m do
+    if authorized?
+       title = Sanitize.clean(params[:title])
+       body = Sanitize.clean(params[:body]).gsub("&#13;","")
+       if (params[:upid] != nil)
+        post = Post.get(params[:upid])
+        post.update_attributes(:title => title, :body => body)
+       else
+        post = Post.create(:user_id => session[:uid], :title => title, :body => body)
+        post.parent_id = params[:pid] if defined?(params[:pid])
+      end
+      if post.valid? 
+        post.save
+      end
+    end
+  end
+end

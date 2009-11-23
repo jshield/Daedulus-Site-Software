@@ -12,13 +12,6 @@
       %li
         %a.npst{:href => "#", :onclick => "showForm('login')", :onclick => "showForm('npst')"}
           Post New Topic
-      %form.npst{:method => "POST", :name => "form_post", :action => "/forum/post", :onsubmit => "postTopic(1);" }
-        %input.npst.title{:type => "text", :name => "title", :value => "Topic Name"}
-        %br
-        %textarea.npst.body{:cols => 40, :rows => 10, :name => "body"}
-        %br
-        %input.button.npst.submit{:type => "button", :name => "submit", :value => "Post", :onclick => "postTopic(0);"}
-        %input.button.npst.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}
       %li
         %a.logout{:href => "#", :onclick => "logout();"} 
           Logout
@@ -26,31 +19,6 @@
       %li
         %a.login{:href => "#", :onclick => "showForm('login')"}
           Login
-      %form.login{:method => "POST", :action => "/user/login" ,:onsubmit => "login();"}
-        %input{ :type => "text", :name => "user", :value => "Username"}
-        %br
-        %input{ :type => "password", :name => "pass", :value => "Password"}
-        %br
-        %input.button.login{ :type => "button", :name => "submit", :value => "Login", :onclick => "login();"}
-        %input.button.login.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}
       %li
         %a.register{:href => "#", :onclick => "showForm('register')"}
-          Register
-      %form.register{:method => "POST", :id => "form_register", :action => "/user/register", :onsubmit =>"validate_registeration();" }
-        %span.username
-        %input.register.user{ :type => "text", :name => "user", :value => "Username"}
-        %br
-        %span.dispname
-        %input.register.disp{ :type => "text", :name => "disp", :value => "Display Name"}
-        %br
-        %span.email
-        %input.register.email{ :type => "email", :name => "email", :value => "Email Address"}
-        %br
-        %span.pass
-        %input.register.pass{ :type => "password", :name => "pass", :value => "Password"}
-        %br
-        %span.pass2
-        %input.register.pass2{ :type => "password", :name => "pass2", :value => "Password"}
-        %br
-        %input.button.register.submit{ :type => "submit", :name => "submit", :value => "Register"}
-        %input.button.register.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}          
+          Register    

@@ -1,7 +1,6 @@
-%input.npst.pid{:type => "hidden", :name => "upid", :value => @post.id,, :onsubmit => "post(#{@post.root.id},1);"}
+%input.npst.pid{:type => "hidden", :name => "upid", :value => @post.id}
 %input.npst.title{:type => "text", :name => "title", :value => @post.title}
 %br
 %textarea.npst.body{:cols => 40, :rows => 10, :name => "body", :onload=>"$('textarea.npst.body').focus();"}= @post.body 
 %br
-%input.button.npst.submit{:type => "button", :name => "submit", :value => "Update", :onclick => "post(#{@post.root.id},0);"}
-%input.button.npst.cancel{ :type => "button", :name => "submit", :value => "Cancel", :onclick => "cancel();"}
+%input.button.npst.submit{:type => "submit", :name => "submit", :value => "Update >>"}
