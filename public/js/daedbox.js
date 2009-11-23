@@ -18,6 +18,7 @@ function page() {
   this.forms["quote"] = new form("Quote Post", null, "loadTopic(this.oid);");
   this.forms["update"] = new form("Update Post", null, "loadTopic(this.oid);");
   this.forms["reply"] = new form("Reply to Topic", null, "loadTopic(this.oid);");
+  this.forms["password"] = new form("Change Password", null, "loadUserBox();");
   this.dialog = null;
 };
 
@@ -99,7 +100,10 @@ function boxyform(form) {
       modal: true,
       show: false,
       closable: true,
-      afterHide: function (d){dialog.unload(); dialog = null;},
+      afterHide: function (d) {
+        dialog.unload();
+        dialog = null;
+      },
       behaviours: function (d) {
         d.find("#" + form.name).submit(function () {
           if (form.validate != null) {
@@ -113,12 +117,15 @@ function boxyform(form) {
             dialog.hideAndUnload();
           });
           return false;
-        });       
+        });
       }
     });
     dialog.setContent("<div style = \"min-width:100px; min-height:50px; text-align:right;\"><form id =\"" + form.name + "\"></form></div>");
     form.elem = $("#" + form.name);
-    form.elem.load(form.url,function (){dialog.show();dialog.center();});
+    form.elem.load(form.url, function () {
+      dialog.show();
+      dialog.center();
+    });
   };
 }
 

@@ -64,6 +64,14 @@ module Sinatra
         end
       end
       
+      app.get '/api/password' do
+        haml :password_form if authorized?
+      end
+      
+      app.post '/api/password' do
+        @user.update_attributes(:password => params["pass"]) if @user.password == params["oldpass"]
+      end
+      
      app.get '/user/list' do
       output = "Users in System<br>"
       User.all.each do |user|

@@ -10,15 +10,18 @@
         %a.messages{:href => "#"} 
           Messages
       %li
-        %a.npst{:href => "#", :onclick => "showForm('login')", :onclick => "showForm('npst')"}
+        %a.password{:href => "#", :onclick => "showForm('password');"} 
+          Change Password
+      %li
+        %a.npst{:href => "#", :onclick => "showForm('npst');"}
           Post New Topic
       %li
         %a.logout{:href => "#", :onclick => "logout();"} 
           Logout
     - else
       %li
-        %a.login{:href => "#", :onclick => "showForm('login')"}
+        %a.login{:href => "#", :onclick => "showForm('login');"}
           Login
       %li
-        %a.register{:href => "#", :onclick => "showForm('register')"}
+        %a.register{:href => "#", :onclick => "showForm('register');"}
           Register    
