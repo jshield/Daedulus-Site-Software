@@ -80,7 +80,6 @@ img
   position: absolute
   bottom: 20px
   left: 15%
-  z-index: 90
   width: 100%
   line-height: 12px
 
@@ -101,13 +100,13 @@ img
     a
       padding: 41px 10px 10px 0
       color: #fff
-      background: #090 url('/g/go.gif') 0 -30px repeat-x
+      background: #123 url('/g/go.gif') 0 -30px repeat-x
       font-size: 11px
       text-align: right
       display: block
 
       &:hover
-        background: #000 url('/g/go.gif') 0 43px repeat-x
+        background: #000 url('/g/go.gif') 0 42px repeat-x
 
   ul
     float: left
@@ -127,6 +126,9 @@ li.cur a
   color: #fff
 
 #mainbox
+  #content
+    z-index: 100
+    
   .box
     position: absolute
     top: 5%
@@ -154,9 +156,6 @@ li.cur a
 
   .white
     color: #fff
-
-#content
-  z-index: 100
 
 
 #userbox
@@ -246,9 +245,15 @@ div.reply
 
 
 fieldset, blockquote, legend
-  margin: 10px 50px 2px 40px  
+  margin: 0 20px 0 10px  
   background-color = !CBGQ
-  min-height: 50px
+
+fieldset, blockquote
+  margin: 15px  
+
+fieldset, legend
+  border: 1px solid
+  border-color = !CBGQ * 0.8
 
 
 #topic
@@ -320,7 +325,7 @@ input,textarea
   margin: 4px
   opacity: 0.8
   filter: alpha(opacity=80)
-  background: #DDD
+  background= !CBGQ
 
   &.button
     padding: 4px

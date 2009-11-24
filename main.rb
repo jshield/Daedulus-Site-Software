@@ -23,6 +23,7 @@ before do
   if authorized?
   @user = User.get(session[:uid])
   end
+  logout! if @user == nil
 end
 
 enable :sessions
@@ -30,12 +31,12 @@ set :environment, :development
 set :public, "./public"
 
 get '/css/theme' do
-  content_type 'text/css', :charset => 'utf-8'  
+  content_type 'text/css', :charset => 'utf-8'
+  style = @user.style.to_s
   if authorized?
-    case @user.style
-      when 1 then sass :style_default
-      when 2 then sass :style_inverted
-      else sass :style_default
+    case style
+      when "default" then sass :style_default
+      when "compact" then sass :style_inverted
     end
   else sass :style_default
   end

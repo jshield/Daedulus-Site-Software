@@ -14,6 +14,7 @@ module Sinatra
 
       def logout!
         session[:authorized] = false
+        session[:uid] = nil
       end
     end
     
