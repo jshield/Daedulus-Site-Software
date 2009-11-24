@@ -32,7 +32,7 @@ set :public, "./public"
 
 get '/css/theme' do
   content_type 'text/css', :charset => 'utf-8'
-  style = @user.style.to_s
+  style = @user.style.to_s unless @user == nil
   if authorized?
     case style
       when "default" then sass :style_default
