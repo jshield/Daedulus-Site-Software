@@ -97,7 +97,6 @@ function boxyform(form) {
   } else if (dialog == null) {
     dialog = new Boxy(null, {
       title: form.title,
-      modal: true,
       show: false,
       closable: true,
       afterHide: function (d) {
