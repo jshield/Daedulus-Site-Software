@@ -99,6 +99,9 @@ function boxyform(form) {
       title: form.title,
       show: false,
       closable: true,
+      hideFade: true,
+      hideShrink: false,
+      FadeIn: true,
       afterHide: function (d) {
         dialog.unload();
         dialog = null;
@@ -123,6 +126,7 @@ function boxyform(form) {
     form.elem = $("#" + form.name);
     form.elem.load(form.url, function () {
       dialog.show();
+      form.elem.find("textarea:first").focus();
       dialog.center();
     });
   };

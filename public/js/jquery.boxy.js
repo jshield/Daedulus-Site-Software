@@ -132,7 +132,8 @@ jQuery.extend(Boxy, {
         afterHide:              Boxy.EF,        // callback fired after dialog is hidden. executed in context of Boxy instance.
         beforeUnload:           Boxy.EF,        // callback fired after dialog is unloaded. executed in context of Boxy instance.
 		hideFade: 				false,
-		hideShrink: 			'vertical'
+		hideShrink: 			'vertical',
+		FadeIn:           false
     },
     
     IE6:                (jQuery.browser.msie && jQuery.browser.version < 7),
@@ -477,7 +478,11 @@ Boxy.prototype = {
             }
         }
 		this.getInner().stop().css({width: '', height: ''});
+        if (this.options.FadeIn){
+        this.boxy.fadeIn(500);
+        } else {
         this.boxy.stop().css({opacity: 1}).show();
+        }
         this.visible = true;
         this.boxy.find('.close:first').focus();
         this._fire('afterShow');
