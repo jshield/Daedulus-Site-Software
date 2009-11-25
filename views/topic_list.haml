@@ -4,7 +4,7 @@
   #stuff        
     - if defined?@posts
       - @posts.each do |pt|             
-        - if pt.children.any?         
+        - if pt.children.any?       
           #topic
             #ttime
               %p= "#{pt.children.last.created_at.strftime("%D")} #{pt.children.last.created_at.strftime("%H:%M")}"                   

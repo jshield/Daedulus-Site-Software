@@ -22,6 +22,7 @@ DataMapper.auto_upgrade!
 before do
   if authorized?
   @user = User.get(session[:uid])
+  @user.update(:last_active => DateTime.now)
   end
   logout! if @user == nil
 end
@@ -113,7 +114,7 @@ get '/api/post/list/haml/:pid' do |p|
 end
 
 get '/api/topic/list/haml' do
-  @posts = Post.all.reverse
+  @posts = Post.all(:order => [ :created_at.asc ])
   haml :topic_list
 end
 
@@ -141,7 +142,7 @@ end
        body = Sanitize.clean(params[:body]).gsub("&#13;","")
        if (params[:upid] != nil)
         post = Post.get(params[:upid])
-        post.update_attributes(:title => title, :body => body)
+        post.update(:title => title, :body => body)
        else
         post = Post.create(:user_id => session[:uid], :title => title, :body => body)
         post.parent_id = params[:pid] if defined?(params[:pid])
