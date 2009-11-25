@@ -114,7 +114,17 @@ get '/api/post/list/haml/:pid' do |p|
 end
 
 get '/api/topic/list/haml' do
-  @posts = Post.all(:order => [ :created_at.asc ])
+  @postroots = Post.all(:order => [ :created_at.asc ])
+  @posts = {}
+  @postroots.each do |pt|
+  if pt.children.any?
+  @posts = @posts.to_a + pt.children.last.to_a
+  elsif pt.children.empty? and pt.id == pt.root.id
+  @posts = @posts.to_a + pt.root.to_a
+  end
+  end
+  @posts = @posts.sort_by {|post| post.created_at}
+  @posts = @posts.reverse
   haml :topic_list
 end
 

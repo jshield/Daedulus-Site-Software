@@ -3,20 +3,12 @@
     %b Test Forum       
   #stuff        
     - if defined?@posts
-      - @posts.each do |pt|             
-        - if pt.children.any?       
-          #topic
-            #ttime
-              %p= "#{pt.children.last.created_at.strftime("%D")} #{pt.children.last.created_at.strftime("%H:%M")}"                   
-            #ttitle
-              %p= "<a href=\"#\" class=\"topic\" onclick=\"loadTopic(#{pt.root.id});\">#{pt.root.title}</a>"
-            #tposter  
-              %p= "<a href=\"#\" class=\"profile\" name=\"#{pt.children.last.user.id}\">#{pt.children.last.user.name}</a>"
-        - elsif pt.children.empty? and pt.id == pt.root.id
-          #topic
-            #ttime
-              %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}"                   
-            #ttitle
-              %p= "<a href=\"#\" class=\"topic\" onclick=\"loadTopic(#{pt.root.id});\">#{pt.root.title}</a>"
-            #tposter  
-              %p= "<a href=\"#\" class=\"profile\" name=\"#{pt.user.id}\">#{pt.user.name}</a>"
+      - @posts.each do |pt|                
+        #topic
+          #ttime
+            %p= "#{pt.created_at.strftime("%D")} #{pt.created_at.strftime("%H:%M")}"                   
+          #ttitle
+            %p= "<a href=\"#\" class=\"topic\" onclick=\"loadTopic(#{pt.root.id});\">#{pt.root.title}</a>"
+          #tposter  
+            %p= "<a href=\"#\" class=\"profile\" name=\"#{pt.user.id}\">#{pt.user.name}</a>"
+
