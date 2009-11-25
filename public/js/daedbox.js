@@ -193,5 +193,6 @@ function logout() {
 function deletePost(id) {
   Page.dialog = new Boxy.confirm("Delete Post?", function () {
     $('#reply-' + id).load('/api/post/delete/' + id);
+    Page.dialog = null;
   });
 };

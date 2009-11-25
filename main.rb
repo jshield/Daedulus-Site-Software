@@ -70,17 +70,19 @@ get '/forum/post/:pid' do |p|
 end
 
 get '/api/post/delete/:pid' do |p|
-   post = Post.get(p)
-   if authorized? and post.user.id == session[:uid]
-     post.children.each do |pt|
-      if pt.id == post.children.first.id
-        repository(:default).adapter.query("UPDATE posts SET parent_id=NULL WHERE id = #{pt.id}")  
+   @post = Post.get(p)
+   if authorized? and @post.user.id == session[:uid]
+     if @post.children.any?
+     @post.children.each do |pt|
+      if pt.id == pt.root.children.first.id
+        pt.update(:parent_id => nil)
+        @pid = pt.id 
       else
-        repository(:default).adapter.query("UPDATE posts SET parent_id=#{post.children.first.id} WHERE id = #{pt.id}") 
+        pt.update(:parent_id => @pid)
       end        
      end
-     post = Post.get(p)
-     post.destroy
+     end
+     @post.destroy
     "Post #{p} deleted"
    end
 end
