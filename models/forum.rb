@@ -5,13 +5,13 @@ class User
   include DataMapper::Resource
 
   property :id, Serial
-  property :uname, String, :nullable => false
-  property :name, String, :nullable => false,
+  property :uname, String, :required => true
+  property :name, String, :required => true,
   :messages => {
                 :presence => "We need a display name.",
                 :is_unique => "We already have someone by that name."
                }
-  property :email, String, :nullable => false,  :format => :email_address,
+  property :email, String, :required => true,  :format => :email_address,
   :messages => {
                 :presence => "We need your email address.",
                 :is_unique => "We already have that email.",
