@@ -62,6 +62,7 @@ function showForm(name, id) {
 
 
 function validate_registration() {
+	var fail = false;
   if ($("input.register.user").val() == "Username") {
     flash("username", "!");
     fail = true;
