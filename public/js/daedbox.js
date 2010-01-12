@@ -19,6 +19,7 @@ function page() {
   this.forms["update"] = new form("Update Post", null, "loadTopic(this.oid);");
   this.forms["reply"] = new form("Reply to Topic", null, "loadTopic(this.oid);");
   this.forms["password"] = new form("Change Password", null, "loadUserBox();");
+  this.forms["status"] = new form("Update Status", null, "loadUserBox();");
   this.dialog = null;
 };
 

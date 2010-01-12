@@ -2,7 +2,10 @@
   %ul
     - if authorized? and @user != nil 
       %li= "<b>Hello, #{@user.name}</b>"
-      %br 
+      %br
+      %li
+        %a.status{:href => "#", :onclick => "showForm('status');"} 
+          Update Status 
       %li
         %a.profile{:href => "#", :onclick => "loadProfile(#{@user.id});"} 
           Profile

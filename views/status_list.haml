@@ -1,0 +1,12 @@
+#content.box
+  %h2
+    %b Live Feed       
+  #stuff        
+    - if defined?Status
+      - @status = Status.all.reverse
+      - @status.each do |status|                
+        #status                
+          #stitle
+            = "<b><a href=\"#\" name=\"#{status.user.id}\">#{status.user.name}</a></b> " + status.body
+          #stime
+            = "<br>Posted on the #{status.created_at.strftime("%D")} at #{status.created_at.strftime("%H:%M")}"
