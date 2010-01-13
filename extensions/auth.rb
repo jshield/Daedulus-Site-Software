@@ -61,8 +61,7 @@ module Sinatra
         newuser = User.create(:uname => params[:user], :name => params[:disp], :email => params[:email], :password => params[:pass])
         if newuser.valid?
           newuser.save
-          event = Status.create(:user_id => newuser.id, :type => :event, :body => "Joined Daedulum Novae.")
-          event.save
+          eventmsg(newuser.id,"joined Daedulum Novae.")
         end
       end
       

@@ -120,14 +120,17 @@ end
         post.update(:title => title, :body => body)
        else
         post = Post.create(:user_id => session[:uid], :title => title, :body => body)
-        post.parent_id = params[:pid] if defined?(params[:pid])
-        puts params[:pid]
+       if params[:pid] != nil
+        post.parent_id = params[:pid] 
+        parent = Post.get(params[:pid])
+   			ebody = "replied to <a class=\"topic\" onclick=\"loadTopic(#{parent.id})\">#{parent.title}</a>"
+   		 else
+   		  ebody = "posted a topic called <a class=\"topic\" onclick=\"loadTopic(#{post.id});\">#{post.title}</a>"
+   		 end
       end
       if post.valid? 
         post.save
-        ebody = "posted a topic called <a class=\"topic\" onclick=\"loadTopic(#{post.id});\">#{post.title}</a>"
-        event = Status.create(:user_id => session[:uid], :type => :event, :body => ebody)
-        event.save        
+        eventmsg(session[:uid],ebody)       
       end
     end
   end

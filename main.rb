@@ -20,7 +20,7 @@ load 'extensions/auth.rb'
 
 configure do
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:./my.db')
-DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
 end
 
 before do
