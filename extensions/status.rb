@@ -4,7 +4,8 @@ class Status
 	
 	property :id, Serial
 	property :created_at, DateTime
-	property :body, String
+	property :body, Text, :length => 500
+	property :type, Enum[ :personal, :event, :private ], :default => :personal
 	
 	belongs_to :user
 	
@@ -23,6 +24,6 @@ end
 
 post '/api/status' do
 	body = Sanitize.clean(params[:body]).gsub("&#13;","")
-	newstatus = Status.create(:user_id => session[:uid], :body => body)
-	newstatus.save	
+	status = Status.create(:user_id => session[:uid], :body => body)
+	status.save	
 end

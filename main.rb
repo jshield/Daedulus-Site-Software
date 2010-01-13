@@ -20,14 +20,13 @@ load 'extensions/auth.rb'
 
 configure do
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:./my.db')
-
-DataMapper.auto_upgrade!
+DataMapper.auto_migrate!
 end
 
 before do
   if authorized?
   @user = User.get(session[:uid])
-  @user.update(:last_active => DateTime.now)
+  @user.update(:last_active => DateTime.now) if @user != nil
   end
   logout! if @user == nil
 end
