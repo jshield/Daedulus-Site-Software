@@ -34,6 +34,7 @@ end
 enable :sessions
 set :environment, :development
 set :public, "./public"
+set :views, "./views"
 
 get '/css/theme' do
   content_type 'text/css', :charset => 'utf-8'
