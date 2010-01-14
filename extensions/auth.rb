@@ -142,12 +142,18 @@ class User
   has n, :post
   has n, :message
   has n, :status
+  has n, :attacks
+  has n, :weapons, :through => :attacks
   
   validates_is_unique :uname
   validates_is_unique :email
   validates_is_unique :name
   validates_present :password
   validates_length :password, :min => 8
+  
+  def profile_link
+  return "<a href=\"#\" class=\"profile\" onclick=\"loadProfile(#{self.id})\">#{self.name}</a>"
+  end
 
 end
 

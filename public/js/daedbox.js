@@ -20,6 +20,8 @@ function page() {
   this.forms["reply"] = new form("Reply to Topic", null, "loadTopic(this.oid);");
   this.forms["password"] = new form("Change Password", null, "loadUserBox();");
   this.forms["status"] = new form("Update Status", null, "loadUserBox();");
+  this.forms["addweapon"] = new form("Add Weapon to Database", null, "loadUserBox();");
+  this.forms["shootuser"] = new form("Shoot User", null, "loadPage('livefeed');")
   this.dialog = null;
 };
 
@@ -137,9 +139,9 @@ function boxyform(form) {
 
 
 function loadIndex() {
-  $('#mainbox').hide();
-  $('#mainbox').load('/api/topic/list/haml', null, function () {
-    $('#mainbox').fadeIn(2000);
+  Page.mainbox.hide();
+  Page.mainbox.load('/api/topic/list/haml', null, function () {
+    Page.mainbox.fadeIn(2000);
     Page.last = "/api/topic/list/haml";
   });
 };
@@ -147,18 +149,18 @@ function loadIndex() {
 
 
 function loadTopic(id) {
-  $('#mainbox').hide();
-  $('#mainbox').load('/api/post/list/haml/' + id, null, function () {
-    $('#mainbox').fadeIn(2000);
+  Page.mainbox.hide();
+  Page.mainbox.load('/api/post/list/haml/' + id, null, function () {
+    Page.mainbox.fadeIn(2000);
   });
 };
 
 
 
 function loadProfile(id) {
-  $('#mainbox').hide();
-  $('#mainbox').load('/api/user/profile/haml/' + id, null, function () {
-    $('#mainbox').fadeIn(2000);
+  Page.mainbox.hide();
+  Page.mainbox.load('/api/user/profile/haml/' + id, null, function () {
+    Page.mainbox.fadeIn(2000);
   });
 };
 
@@ -178,10 +180,14 @@ function loadPage(pagename) {
     loadUserBox();
     loadIndex();
     return true;
+  } else if (pagename == "livefeed") {
+    loadUserBox();
+    Page.mainbox.hide();
+    Page.mainbox.load('/api/status/list', null, function () {
+      Page.mainbox.fadeIn(2000);
+    });
   }
 };
-
-
 
 function logout() {
   var auth

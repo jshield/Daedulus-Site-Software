@@ -16,7 +16,7 @@ require 'extensions/bbcode.rb'
 load 'extensions/forum.rb'
 load 'extensions/status.rb'
 load 'extensions/auth.rb'
-
+load 'extensions/toys.rb'
 
 configure do
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:./my.db')

@@ -1,0 +1,6 @@
+%p= "Target: #{User.get(params[:tid]).name}"
+%input.shootuser.tid{:type => "hidden", :name => "tid", :value => params[:tid]}
+%br
+= select_weapon
+%br
+%input.button.shootuser.submit{:type => "submit", :name => "submit", :value => "Shoot"}

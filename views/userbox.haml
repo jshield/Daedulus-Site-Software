@@ -4,6 +4,9 @@
       %li= "<b>Hello, #{@user.name}</b>"
       %br
       %li
+        %a.addweapon{:href => "#", :onclick => "showForm('addweapon');"} 
+          Add Weapon to Database
+      %li 
         %a.status{:href => "#", :onclick => "showForm('status');"} 
           Update Status 
       %li

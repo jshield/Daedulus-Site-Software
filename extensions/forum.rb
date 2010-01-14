@@ -123,9 +123,9 @@ end
        if params[:pid] != nil
         post.parent_id = params[:pid] 
         parent = Post.get(params[:pid])
-   			ebody = "replied to <a class=\"topic\" onclick=\"loadTopic(#{parent.id})\">#{parent.title}</a>"
+   			ebody = "replied to <a class=\"topic\" onclick=\"loadTopic(#{parent.id})\">#{parent.title}</a>."
    		 else
-   		  ebody = "posted a topic called <a class=\"topic\" onclick=\"loadTopic(#{post.id});\">#{post.title}</a>"
+   		  ebody = "posted a topic called <a class=\"topic\" onclick=\"loadTopic(#{post.id});\">#{post.title}</a>."
    		 end
       end
       if post.valid? 

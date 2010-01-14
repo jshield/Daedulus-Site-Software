@@ -10,6 +10,9 @@
       = "Registered on the " + @user.created_at.strftime("%D") + " at " + @user.created_at.strftime("%H:%M") + "."
   #end
     %p.end{:style => "text-align:right;padding-right:40px;margin-bottom:5px;"}
+      %a.shoot{ :href => "#", :onclick => "showForm('shootuser',#{@user.id})"}
+        Shoot
+      |
       %a.index{ :href =>"#", :onclick => "return loadIndex();"}
         Return to Forum Index
         
