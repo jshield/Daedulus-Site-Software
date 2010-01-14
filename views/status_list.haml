@@ -3,7 +3,7 @@
     %b "Live" Feed       
   #stuff        
     - if defined?Status
-      - @status = Status.all.reverse
+      - @status = Status.last(8)
       - @status.each do |status|                
         #status                
           #stitle

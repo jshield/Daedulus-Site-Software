@@ -128,12 +128,11 @@ class User
                 :length => "Password is too short needs to be at least 8 characters long"
                }
   property :custom_title, Text
-  property :post_count, Integer
-  property :style, Enum[ :default, :compact ], :default => :default
-  property :color, Enum[ :default, :inverted ], :default => :default
   property :sig, Text
   property :sex, Enum[ :male, :female, :intersex, :undefined ], :default => :undefined
   property :dob, Date
+  property :style, Enum[ :default, :compact ], :default => :default
+  property :color, Enum[ :default, :inverted ], :default => :default
   property :created_at, DateTime
   property :last_active, DateTime
   property :flags, Flag[ :activated, :banned ] 

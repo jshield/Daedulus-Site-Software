@@ -34,7 +34,6 @@ module Sinatra
 			end
 
 			app.get '/api/status/list' do
-				@status = Status.all.reverse
 				haml :status_list
 			end
 
