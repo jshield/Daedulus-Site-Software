@@ -7,6 +7,6 @@
       - @status.each do |status|                
         #status                
           #stitle
-            = "<b>#{status.user.profile_link}</b> " + status.body
+            = "<b>#{status.user.link}</b> " + status.body
           #stime
             = "<br>Posted on the #{status.created_at.strftime("%D")} at #{status.created_at.strftime("%H:%M")}"

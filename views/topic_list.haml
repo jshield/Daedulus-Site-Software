@@ -10,5 +10,5 @@
           #ttitle
             %p= "<a href=\"#\" class=\"topic\" onclick=\"loadTopic(#{pt.root.id});\">#{pt.root.title}</a>"
           #tposter  
-            %p= "<a href=\"#\" class=\"profile\" name=\"#{pt.user.id}\">#{pt.user.name}</a>"
+            %p= pt.user.link
 

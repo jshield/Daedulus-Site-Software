@@ -19,10 +19,10 @@ module Sinatra
 	module UserStatus
 		module Helpers
     
-    	def eventmsg(id,msg)    	
-    	event = Status.create(:user_id => id, :type => :event, :body => msg)
-    	event.save    	
-    	end
+    	def eventmsg(user, msg)     	  	
+    	  event = user.status.create(:type => :event, :body => msg)
+    	  event.save    	
+    	end    
     
     end
     
@@ -39,8 +39,7 @@ module Sinatra
 
 			app.post '/api/status' do
 				body = Sanitize.clean(params[:body]).gsub("&#13;","")
-				status = Status.create(:user_id => session[:uid], :body => body)
-				status.save	
+				@user.status.create(:body => body)
 			end
 		end
 	end		

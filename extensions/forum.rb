@@ -55,8 +55,8 @@ get '/api/post/delete/:pid' do |p|
 end
 
 get '/api/reply/:pid' do |p|
-  @post = Post.get!(p)
   if authorized?
+    @post = Post.get!(p)
     haml :reply_form
   else
   
@@ -119,7 +119,7 @@ end
         post = Post.get(params[:upid])
         post.update(:title => title, :body => body)
        else
-        post = Post.create(:user_id => session[:uid], :title => title, :body => body)
+        post = @user.post.create(:title => title, :body => body)
        if params[:pid] != nil
         post.parent_id = params[:pid] 
         parent = Post.get(params[:pid])
@@ -130,7 +130,7 @@ end
       end
       if post.valid? 
         post.save
-        eventmsg(session[:uid],ebody)       
+        eventmsg(@user,ebody)       
       end
     end
   end

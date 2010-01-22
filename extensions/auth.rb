@@ -61,7 +61,7 @@ module Sinatra
         newuser = User.create(:uname => params[:user], :name => params[:disp], :email => params[:email], :password => params[:pass])
         if newuser.valid?
           newuser.save
-          eventmsg(newuser.id,"joined Daedulum Novae.")
+          eventmsg(newuser,"joined Daedulum Novae.")
         end
       end
       
@@ -127,16 +127,18 @@ class User
                 :presence => "You need to provide a password",
                 :length => "Password is too short needs to be at least 8 characters long"
                }
-  property :custom_title, Text
-  property :sig, Text
-  property :sex, Enum[ :male, :female, :intersex, :undefined ], :default => :undefined
-  property :dob, Date
+
   property :style, Enum[ :default, :compact ], :default => :default
   property :color, Enum[ :default, :inverted ], :default => :default
   property :created_at, DateTime
   property :last_active, DateTime
   property :flags, Flag[ :activated, :banned ] 
   property :permissions, Flag[ :admin, :moderator, :tagman ]
+  property :custom_title, Text
+  property :sig, Text
+  property :sex, Enum[ :male, :female, :intersex, :undefined ], :default => :undefined
+  property :dob, Date
+
 
   has n, :post
   has n, :message
@@ -149,11 +151,20 @@ class User
   validates_is_unique :name
   validates_present :password
   validates_length :password, :min => 8
-  
-  def profile_link
-  return "<a href=\"#\" class=\"profile\" onclick=\"loadProfile(#{self.id})\">#{self.name}</a>"
-  end
 
+  def link
+    return "<a href=\"#\" class=\"profile\" onclick=\"loadProfile(#{self.id})\">#{self.name}</a>"
+  end
+  
+  def curstatus
+    if self.status.last(:type => :personal) != nil
+    status = self.status.last(:type => :personal).body
+    else
+    status = "has not set a status message."
+    end
+    return status  
+  end
+  
 end
 
 class Message

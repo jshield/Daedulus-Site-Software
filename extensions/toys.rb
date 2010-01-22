@@ -6,7 +6,7 @@ module Sinatra
 	    def shoot(tid,wid)
         target = User.get(tid)
         weapon = Weapon.get(wid)
-        eventmsg(session[:uid],"#{weapon.action} #{target.profile_link} with a #{weapon.name}.")  
+        eventmsg(@user,"#{weapon.action} #{target.link} with a #{weapon.name}.")  
       end
       
       def addweapon(name,action)
