@@ -10,7 +10,7 @@
     %script{ :src => "/js/jquery.boxy.js", :type =>"text/javascript"}
     %script{ :src => "/js/daedbox.js", :type =>"text/javascript"}    
   %body
-    %div{ :style => "height:100%;margin-left:3%;background-image: url(/i/downarrow.png);background-repeat:repeat-y;"}
+    %div{ :style => "height:100%;margin-left:3%;background-image: url(/i/downarrow.png);background-repeat:repeat-y;z-index:55;position:absolute;width:10%"}
     = haml :mainmenu
 
     #userbox
@@ -18,6 +18,8 @@
         %h2
           %b= @date
     #mainbox
-      = haml :status_list 
+      = haml :status_list     
+    #bg
+      %img{:alt => "", :src => "http://i64.photobucket.com/albums/h180/ragingshinigami/tech3.jpg"}/
 
 

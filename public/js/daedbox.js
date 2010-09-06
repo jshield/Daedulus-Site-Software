@@ -25,8 +25,6 @@ function page() {
   this.dialog = null;
 };
 
-
-
 function form(title, validate, callback) {
   this.title = title;
   this.validate = function () {
@@ -41,15 +39,6 @@ function form(title, validate, callback) {
   this.name;
 };
 
-
-
-function flash(span, msg) {
-  $("span." + span).css("color", "red");
-  $("span." + span).text(msg).show().fadeOut(3000);
-};
-
-
-
 function showForm(name, id) {
   var form = Page.forms[name];
   form.name = name;
@@ -62,7 +51,54 @@ function showForm(name, id) {
   boxyform(form);
 };
 
+function boxyform(form) {
+  dialog = Page.dialog;
+  if (dialog != null) {
+    dialog.show();
+    return true;
+  } else if (dialog == null) {
+    dialog = new Boxy(null, {
+      title: form.title,
+      show: false,
+      closable: true,
+      hideFade: true,
+      hideShrink: false,
+      FadeIn: true,
+      afterHide: function (d) {
+        dialog.unload();
+        dialog = null;
+      },
+      behaviours: function (d) {
+        d.find("#" + form.name).submit(function () {
+          if (form.validate != null) {
+            if (form.validate() == false) {
+              return false;
+            }
+          }
+          dialog.setContent("<div style = \"min-width:100px; min-height:50px; margin:auto; padding-top: 40px; text-align:center\">Sending...</div>");
+          $.post("/api/" + form.name, d.find("#" + form.name).serialize(), function (data) {
+            form.callback();
+            dialog.setContent("<div style = \"min-width:100px; min-height:50px; margin:auto; padding-top: 40px; text-align:center\">Sent</div>");
+            dialog.hideAndUnload();
+          });
+          return false;
+        });
+      }
+    });
+    dialog.setContent("<div style = \"min-width:100px; min-height:50px; text-align:right;\"><form id =\"" + form.name + "\"></form></div>");
+    form.elem = $("#" + form.name);
+    form.elem.load(form.url, function () {
+      dialog.show();
+      form.elem.find("textarea:first").focus();
+      dialog.center();
+    });
+  };
+}
 
+function flash(span, msg) {
+  $("span." + span).css("color", "red");
+  $("span." + span).text(msg).show().fadeOut(3000);
+};
 
 function validate_registration() {
 	var fail = false;
@@ -90,51 +126,6 @@ function validate_registration() {
     return false;
   };
 };
-
-
-
-function boxyform(form) {
-  dialog = Page.dialog;
-  if (dialog != null) {
-    dialog.show();
-    return true;
-  } else if (dialog == null) {
-    dialog = new Boxy(null, {
-      title: form.title,
-      show: false,
-      closable: true,
-      hideFade: true,
-      hideShrink: false,
-      FadeIn: true,
-      afterHide: function (d) {
-        dialog.unload();
-        dialog = null;
-      },
-      behaviours: function (d) {
-        d.find("#" + form.name).submit(function () {
-          if (form.validate != null) {
-            if (form.validate() == false) {
-              return false;
-            }
-          }
-          Boxy.get(this).setContent("<div style = \"min-width:100px; min-height:50px\">Sending...</div>");
-          $.post("/api/" + form.name, d.find("#" + form.name).serialize(), function (data) {
-            form.callback();
-            dialog.hideAndUnload();
-          });
-          return false;
-        });
-      }
-    });
-    dialog.setContent("<div style = \"min-width:100px; min-height:50px; text-align:right;\"><form id =\"" + form.name + "\"></form></div>");
-    form.elem = $("#" + form.name);
-    form.elem.load(form.url, function () {
-      dialog.show();
-      form.elem.find("textarea:first").focus();
-      dialog.center();
-    });
-  };
-}
 
 
 

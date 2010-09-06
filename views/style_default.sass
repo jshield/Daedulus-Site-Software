@@ -1,11 +1,11 @@
-!CBGP = #FFF
-!CBGQ = #DDD  
-!CTP = #000
-!CT = #000
-!CBG = #456
+$CBGP: black
+$CBGQ: #131313
+$CTP: #9A9A9A
+$CT: lighten($CTP, 20%)
+$CBG: darken(#445566, 10%)
 
 *
-  border: 0px solid #eee
+  border: 0px solid #eeeeee
   margin: 0
   padding: 0
   list-style: none
@@ -14,12 +14,18 @@ html, body
   width: 100%
   height: 100%
   overflow: hidden
-  font-family: Arial,Helvetica,sans-serif
+  font-family: Arial, Helvetica, sans-serif
   font-size: 10px
   cursor: default
-  background-color = !CBG
-  color = !CT
-
+  background-color: $CBG
+  color: $CT
+  
+#bg, #bg table, #bg td
+  width: 100%
+  height: 100%
+  overflow: hidden
+  z-index: 90
+  
 #bg
   div
     position: absolute
@@ -27,16 +33,15 @@ html, body
     height: 200%
     top: -50%
     left: -50%
-
   td
     vertical-align: middle
     text-align: center
-
   img
     min-height: 50%
+    width: 100%
     min-width: 50%
     margin: 0 auto
-  
+
 #mainbox
   width: 50%
   height: 100%
@@ -59,19 +64,16 @@ html, body
   overflow: no
 
 h1, h2, .large, .left
-  font-family: "Century Gothic","Lucida Grande",Arial,sans-serif
+  font-family: "Century Gothic", "Lucida Grande", Arial, sans-serif
   font-size: 40px
-
 
 h2, .box div img
   padding-bottom: 10px
 
-
 a
   text-decoration: none
-  color = !CTP
+  color: $CTP
   outline: 0
-
 
 img
   display: block
@@ -82,179 +84,147 @@ img
   left: 15%
   width: 100%
   line-height: 12px
-
+  z-index: 60
   div
     height: 56px
-    background: #000
+    background: black
     opacity: 0.6
-    filter: alpha(opacity=60)
+    filter: alpha(opacity = 60)
     padding: 7px 0 0 7px
-
   h1
     position: relative
     left: -100%
     margin-bottom: -63px
     width: 100%
     opacity: 0.99
-
     a
       padding: 41px 10px 10px 0
-      color: #fff
-      background: #123 url('/g/go.gif') 0 -30px repeat-x
+      color: white
+      background: #112233 url("/g/go.gif") 0 -30px repeat-x
       font-size: 11px
       text-align: right
       display: block
-
       &:hover
-        background: #000 url('/g/go.gif') 0 42px repeat-x
-
+        background: black url("/g/go.gif") 0 42px repeat-x
   ul
     float: left
     width: 110px
-
   li a
     height: 12px
     padding: 0 5px
     font-weight: bold
-    color: #999
+    color: #999999
     display: block
-
     &:hover
-      color: #fff
+      color: white
 
 li.cur a
-  color: #fff
+  color: white
 
 #mainbox
   #content
     z-index: 100
-    
   .box
     position: absolute
     top: 5%
     width: 95%
     padding-bottom: 20px
-
     div
       line-height: 1.5em
-
   .large
     text-align: right
     top: 125px
     right: 120px
     font-size: 13px
-
   .left
     text-align: left
     right: auto
     left: 180px
     font-size: 13px
-
   .large h2
     font-size: 60px
-    :background-color= !CBGP
-
+    background-color: $CBGP
   .white
-    color: #fff
-
+    color: white
 
 #userbox
   font-size: 13px
-
   .box
     position: absolute
     top: 0px
     left: -11%
     width: 60%
     padding: 3%
-
   .large
     text-align: right
     top: 0
     right: 10%
     font-size: 13px
-    
     h2
       font-size: 60px
-
   .left
     text-align: left
     left: 30%
-
   .right
     text-align: right
     left: 30%
-
   .medium h2
     font-size: 20px
-
   .white
-    background: #fff
+    background: white
     opacity: 0.8
-    filter: alpha(opacity=80)
-
+    filter: alpha(opacity = 80)
   .red
-    background: #811
+    background: #881111
     opacity: 0.8
-    filter: alpha(opacity=80)
-
+    filter: alpha(opacity = 80)
   ul
     float: right
-
   li a
     height: 12px
     padding: 0px 5px
     font-weight: bold
-    color: #999
+    color: #999999
     display: block
-
     &:hover
-      color: #0f0
-
+      color: lime
 
 li.cur a
-  color: #0f0
-
+  color: lime
 
 div.reply
-  background-color= !CBGP
+  background-color: $CBGP
+  opacity: 0.6
   margin-bottom: 5px
   min-height: 50px
   padding-bottom: 10px
-  color = !CTP
-
+  color: $CTP
   p.by
     padding: 0 35px 2px 35px
     font-weight: bold
-
   #body
     margin: 5px 40px 2px 40px
     min-height: 60px
     border-bottom-width: 1px
-    border-color: #BBD
-
+    border-color: #bbbbdd
   p.last
     padding: 0 30px 30px 30px
-
   p.links
     padding-right: 40px
     text-align: right
-    
   b
     padding: 12px 0 0 5px
 
-
 fieldset, blockquote, legend
-  margin: 0 20px 0 10px  
-  background-color = !CBGQ
+  margin: 0 20px 0 10px
+  background-color: $CBGQ
 
 fieldset, blockquote
-  margin: 15px  
+  margin: 15px
 
 fieldset, legend
   border: 1px solid
-  border-color = !CBGQ * 0.8
-
+  border-color: $CBGQ * 0.8
 
 #topic
   overflow: hidden
@@ -263,24 +233,20 @@ fieldset, legend
   margin-left: auto
   margin-right: auto
 
-
 #ttime
   height: 30px
   width: 20%
   float: left
-
 
 #ttitle
   height: 30px
   width: 50%
   float: left
 
-
 #tposter
   height: 30px
   width: 30%
   float: right
-
 
 #ttime, #ttitle, #tposter
   p
@@ -297,53 +263,48 @@ li.hdr
     padding: 8px
     font-style: italic
 
-
 #tposter
   p
     font-weight: bold
     font-size: 12px
     padding-top: 7px
-
-
   a
-    color = !CTP
+    color: $CTP
 
 #status
   margin-bottom: 10px
   background: none
-  
+
 #stitle
   font-size: 18px
   a
-    color = !CBGQ
-    
+    color: $CTP
+
 #stime
   font-size: 10px
   margin-top: -20px
   margin-left: 5px
-  	
-p
-  background-color= !CBGP
-  color= !CTP
 
+p
+  background-color: $CBGP
+  color: $CTP
+  opacity: 0.8
 
 h3.title
   padding: 12px 0px 0px 30px
   text-transform: uppercase
   line-height: 20px
   font-weight: bold
-  background-color= !CBGP
+  background-color: $CBGP
   font-size: 13px
-
 
 input,textarea
   margin: 4px
   opacity: 0.8
-  filter: alpha(opacity=80)
-  background= !CBGQ
-
+  filter: alpha(opacity = 80)
+  background: lighten($CBGQ, 10%)
+  color: $CT
   &.button
     padding: 4px
     opacity: 0.6
-    filter: alpha(opacity=60)
-
+    filter: alpha(opacity = 60)

@@ -11,7 +11,7 @@ class Status
 	
 	belongs_to :user
 	
-	validates_present :body
+	validates_presence_of :body
 
 end
 

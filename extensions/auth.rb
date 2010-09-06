@@ -139,18 +139,14 @@ class User
   property :sex, Enum[ :male, :female, :intersex, :undefined ], :default => :undefined
   property :dob, Date
 
-
-  has n, :post
   has n, :message
-  has n, :status
-  has n, :attacks
-  has n, :weapons, :through => :attacks
+  has n, :status, Status
   
-  validates_is_unique :uname
-  validates_is_unique :email
-  validates_is_unique :name
-  validates_present :password
-  validates_length :password, :min => 8
+  validates_uniqueness_of :uname
+  validates_uniqueness_of :email
+  validates_uniqueness_of :name
+  validates_presence_of :password
+  validates_length_of :password, :min => 8
 
   def link
     return "<a href=\"#\" class=\"profile\" onclick=\"loadProfile(#{self.id})\">#{self.name}</a>"
@@ -177,8 +173,8 @@ class Message
   
   belongs_to :user
   
-  validates_present :message
-  validates_present :sender
-  validates_present :sendee
+  validates_presence_of :message
+  validates_presence_of :sender
+  validates_presence_of :sendee
   
 end

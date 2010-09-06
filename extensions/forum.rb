@@ -1,24 +1,3 @@
-
-#Models
-
-class Post
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :parent_id, Integer
-  property :title, String
-  property :body, Text
-  property :created_at, DateTime
-  property :modified_at, DateTime
-  belongs_to :user
-  is :tree, :order => :id
-  has_tags_on :tags
-  
-  validates_present :title
-  validates_present :body
-  
-end
-
 #Routes
 
 get '/forum' do
@@ -50,7 +29,7 @@ get '/api/post/delete/:pid' do |p|
      end
      end
      @post.destroy
-    "Post #{p} deleted"
+    "<div style = \"min-width:100px; min-height:25px; margin:auto; padding-top: 40px; text-align:center\">Post #{p} deleted.</div>"
    end
 end
 
@@ -134,4 +113,29 @@ end
       end
     end
   end
+end
+
+#Models
+
+class Post
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :parent_id, Integer
+  property :title, String
+  property :body, Text
+  property :created_at, DateTime
+  property :modified_at, DateTime
+  belongs_to :user
+  is :tree, :order => :id
+  has_tags_on :tags
+  
+  validates_presence_of :title
+  validates_presence_of :body
+  
+end
+
+class User 
+  #include DataMapper::Resource
+  has n, :post
 end

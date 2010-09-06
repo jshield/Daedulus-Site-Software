@@ -1,5 +1,4 @@
 require 'rubygems'
-gem 'sinatra-sinatra'
 require 'sinatra'
 require 'dm-core'
 require 'dm-is-tree'
@@ -8,20 +7,20 @@ require 'dm-tags'
 require 'dm-timestamps'
 require 'dm-validations'
 require 'dm-serializer'
+require 'dm-migrations'
 require 'sanitize'
 require 'haml'
 require 'sass'
 require 'date'
 require 'extensions/bbcode.rb'
-load 'extensions/forum.rb'
 load 'extensions/status.rb'
 load 'extensions/auth.rb'
+load 'extensions/forum.rb'
 load 'extensions/toys.rb'
 
-configure do
 DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3:./my.db')
+DataMapper.finalize
 DataMapper.auto_upgrade!
-end
 
 before do
   if authorized?

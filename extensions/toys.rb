@@ -48,6 +48,11 @@ module Sinatra
 	register Shoot
 end
 
+class User
+  has n, :attacks
+  has n, :weapons, :through => :attacks
+end
+
 class Weapon
   include DataMapper::Resource
   
@@ -58,8 +63,8 @@ class Weapon
   has n, :attacks
   has n, :users, :through => :attacks
   
-  validates_present :name
-  validates_present :action
+  validates_presence_of :name
+  validates_presence_of :action
   
 end
 
